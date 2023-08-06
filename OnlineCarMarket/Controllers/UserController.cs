@@ -48,8 +48,12 @@ namespace OnlineCarMarket.Controllers
         }
 
         [HttpPost]
-        public IActionResult LogIn(LogInUserViewModel model)
+        public async Task<IActionResult> LogIn(LogInUserViewModel model)
         {
+            if (ModelState.IsValid)
+            {
+                await userServices.LogInAsync(model);
+            }
 
             return View();
 

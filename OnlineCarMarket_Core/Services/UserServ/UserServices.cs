@@ -2,6 +2,8 @@
 using OnlineCarMarket_Core.Models.UserModels;
 using OnlineCarMarket_Infastructure.Data;
 using OnlineCarMarket_Infastructure.Entities;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace OnlineCarMarket_Core.Services.UserServ
 {
@@ -12,7 +14,7 @@ namespace OnlineCarMarket_Core.Services.UserServ
         private readonly UserManager<User> userManager;
 
 
-        public UserServices( 
+        public UserServices(
             ApplicationDbContext _data,
             SignInManager<User> _signInManager,
             UserManager<User> _userManager
@@ -23,10 +25,13 @@ namespace OnlineCarMarket_Core.Services.UserServ
             signInManager = _signInManager;
         }
 
-        public async Task AddUserAsync (RegisterUserViewModel model)
+        public async Task AddUserAsync(RegisterUserViewModel model)
         {
-            string pass = model.PassWord;
-            string passhash = BCrypt.Net.BCrypt.EnhancedHashPassword(pass);
+            SHA256 hash = SHA256.Create();
+            var pass = Encoding.Default.GetBytes(model.PassWord);
+            var hashedPass = hash.ComputeHash(pass);
+
+            var finalPass = Convert.ToHexString(hashedPass);
 
             User user = new User()
             {
@@ -34,25 +39,38 @@ namespace OnlineCarMarket_Core.Services.UserServ
                 Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                PasswordHash = passhash
+                PasswordHash = model.PassWord
             };
 
             data.Add(user);
             await data.SaveChangesAsync();
 
-            await signInManager.SignInAsync(user, isPersistent: false);            
+            await signInManager.SignInAsync(user, isPersistent: false);
+        }
+
+        public  async Task LogInAsync(LogInUserViewModel model)
+        {
+            var findUser = data.Users.FirstOrDefault(x => x.UserName == model.Username);
+            if (findUser != null && findUser.PasswordHash == model.Password)
+            {
+                await signInManager.SignInAsync(findUser, isPersistent:false);
+            }
+
+
         }
 
         public bool UserExists(string username)
         {
-            var FindUser = data.Users.FirstOrDefault(x=>x.UserName == username);
+            var FindUser = data.Users.FirstOrDefault(x => x.UserName == username);
             if (FindUser == null)
             {
                 return false;
             }
 
             return true;
-            
+
         }
+
+
     }
 }

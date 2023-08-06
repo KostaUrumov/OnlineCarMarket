@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using OnlineCarMarket_Core.Services.UserServ;
 using OnlineCarMarket_Infastructure.Data;
 using OnlineCarMarket_Infastructure.Entities;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
