@@ -55,7 +55,7 @@ namespace OnlineCarMarket.Controllers
                 await userServices.LogInAsync(model);
             }
 
-            return View();
+            return RedirectToAction("Index", "Home");
 
         }
 
