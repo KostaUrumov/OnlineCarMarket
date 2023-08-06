@@ -4,7 +4,7 @@ using OnlineCarMarket_Infastructure.Entities;
 
 namespace OnlineCarMarket_Infastructure.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -51,12 +51,12 @@ namespace OnlineCarMarket_Infastructure.Data
                 .HasData
                 (
                    new BodyType { Id = 1, Name = "Sedan" },
-                   new BodyType { Id = 1, Name = "SUV" },
-                   new BodyType { Id = 1, Name = "Kombi" },
-                   new BodyType { Id = 1, Name = "Limo" },
-                   new BodyType { Id = 1, Name = "Van" },
-                   new BodyType { Id = 1, Name = "Coupe" },
-                   new BodyType { Id = 1, Name = "HatchBack" }
+                   new BodyType { Id = 2, Name = "SUV" },
+                   new BodyType { Id = 3, Name = "Kombi" },
+                   new BodyType { Id = 4, Name = "Limo" },
+                   new BodyType { Id = 5, Name = "Van" },
+                   new BodyType { Id = 6, Name = "Coupe" },
+                   new BodyType { Id = 7, Name = "HatchBack" }
                 );
 
             builder.Entity<EngineType>()
@@ -71,8 +71,15 @@ namespace OnlineCarMarket_Infastructure.Data
 
                 );
 
-
             base.OnModelCreating(builder);
         }
+
+
+        public DbSet<BodyType> BoduTypes { get; set; } = null!;
+        public DbSet<Car> Cars { get; set; } = null!;
+        public DbSet<Country> Countries { get; set; } = null!;
+        public DbSet<Engine> Engines { get; set; } = null!;
+        public DbSet<EngineType> EngineTypes { get; set; } = null!;
+        public DbSet<Manifacturer> Manifacturers { get; set; } = null!;
     }
 }

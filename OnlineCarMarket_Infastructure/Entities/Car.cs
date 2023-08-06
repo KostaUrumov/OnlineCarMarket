@@ -22,7 +22,7 @@ namespace OnlineCarMarket_Infastructure.Entities
         [Required]
         public int BodyTypeId { get; set; }
 
-        [ForeignKey(nameof(BodyType))]
+        [ForeignKey(nameof(BodyTypeId))]
         public BodyType BodyType { get; set; } = null!;
 
         [Required]
