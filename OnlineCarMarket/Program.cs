@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using OnlineCarMarket_Core.Services.UserServ;
 using OnlineCarMarket_Infastructure.Data;
 using OnlineCarMarket_Infastructure.Entities;
-using Microsoft.AspNetCore.Identity;
+using OnlineCarMarket_Core.Interfaces;
+using OnlineCarMarket_Core.Services.CarServ;
+using OnlineCarMarket_Core.Services.UserServ;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,7 @@ builder.Services.AddDefaultIdentity<User>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IUserServices, UserServices>();
+builder.Services.AddScoped<ICarService, CarServices>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

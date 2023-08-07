@@ -31,12 +31,9 @@ namespace OnlineCarMarket_Infastructure.Entities
         [ForeignKey(nameof(EngineId))]
         public Engine Engine { get; set; } = null!;
 
+        [Required]
+        public DateTime FirstRegistration { get; set; }
+
         public int NumberOfDoors { get; set; }
-
-        public bool AciveVignette { get; set; }
-
-        public bool RightHanded { get; set; }
-
-        public bool IsRegistered { get; set; }
     }
 }

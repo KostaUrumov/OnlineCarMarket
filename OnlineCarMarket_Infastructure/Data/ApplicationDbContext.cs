@@ -71,6 +71,22 @@ namespace OnlineCarMarket_Infastructure.Data
 
                 );
 
+
+            builder.Entity<Engine>()
+                .HasData
+                (
+                    new Engine { Id = 1, EngineTypeId = 1, FuelConsumption = 10.8, HorsePower = 150, ManifacturerId = 1, Volume = 2000 },
+                    new Engine { Id = 2, EngineTypeId = 2, FuelConsumption = 7.4, HorsePower = 140, ManifacturerId = 8, Volume = 1800 },
+                    new Engine { Id = 3, EngineTypeId = 1, FuelConsumption = 6.4, HorsePower = 90, ManifacturerId = 13, Volume = 1100 },
+                    new Engine { Id = 4, EngineTypeId = 2, FuelConsumption = 2.2, HorsePower = 80, ManifacturerId = 4, Volume = 900 },
+                    new Engine { Id = 5, EngineTypeId = 3, FuelConsumption = 1, HorsePower = 90, ManifacturerId = 7, Volume = 500 },
+                    new Engine { Id = 6, EngineTypeId = 2, FuelConsumption = 5.3, HorsePower = 124, ManifacturerId = 1, Volume = 1600 },
+                    new Engine { Id = 7, EngineTypeId = 4, FuelConsumption = 14.5, HorsePower = 184, ManifacturerId = 3, Volume = 2700 },
+                    new Engine { Id = 8, EngineTypeId = 6, FuelConsumption = 2.6, HorsePower = 186, ManifacturerId = 4, Volume = 600 },
+                    new Engine { Id = 9, EngineTypeId = 1, FuelConsumption = 6.7, HorsePower = 118, ManifacturerId = 9, Volume = 1500 }
+
+                );
+
             base.OnModelCreating(builder);
         }
 
