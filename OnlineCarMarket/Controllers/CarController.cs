@@ -22,34 +22,30 @@ namespace OnlineCarMarket.Controllers
         [HttpGet]
         public async Task<IActionResult> AddCar()
         {
-            RegisterCarViewModel viewModel = new RegisterCarViewModel()
+            RegisterCarViewModel model = new RegisterCarViewModel()
             {
                 BodyTypes = await carServices.GetBodyTypes(),
                 Engine = await carServices.GetEngines(),
                 Manifacturers = await carServices.GetManifacturers()
             };
 
-            return View(viewModel);
+            return View(model);
         }
 
 
         [HttpPost]
-
         public async Task<IActionResult> AddCar(RegisterCarViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                await carServices.AddCarAsync(model);
-            }
 
+            await carServices.AddCarAsync(model);
 
             return RedirectToAction(nameof(AllCars));
         }
 
-        public  IActionResult AllCars()
+        public IActionResult AllCars()
         {
 
-            return View();
+            return View(carServices.GetAllCars());
         }
     }
 }

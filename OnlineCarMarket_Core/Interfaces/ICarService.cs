@@ -12,6 +12,8 @@ namespace OnlineCarMarket_Core.Interfaces
 
         Task<IEnumerable<Manifacturer>> GetManifacturers();
 
+        Task<IEnumerable<DisplayCarModel>> GetAllCars();
+
 
     }
 }

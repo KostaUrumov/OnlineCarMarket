@@ -7,7 +7,7 @@ namespace OnlineCarMarket_Core.Models.Car
     public class RegisterCarViewModel
     {
         [Required]
-        public string Model { get; set; } = null!;
+        public string Type { get; set; } = null!;
 
         [Required]
         [Display(Name = "Kilometers stand")]

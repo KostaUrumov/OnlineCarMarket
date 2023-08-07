@@ -18,7 +18,7 @@ namespace OnlineCarMarket_Core.Services.CarServ
             Car auto = new Car()
             {
                 ManifacturerId = model.ManifacturerId,
-                Model = model.Model,
+                Model = model.Type,
                 Milage = model.Milage,
                 BodyTypeId = model.BodyTypeId,
                 EngineId = model.EngineId,
@@ -29,6 +29,22 @@ namespace OnlineCarMarket_Core.Services.CarServ
             data.Cars.Add(auto);
             await data.SaveChangesAsync();
 
+        }
+
+        public async Task<IEnumerable<DisplayCarModel>> GetAllCars()
+        {
+           List<DisplayCarModel> listedCars = data
+                .Cars
+                .Select(x => new DisplayCarModel()
+                {
+                    Model = x.Model,
+                    Manifacturer = x.Manifacturer.Name,
+                    FirstRegistration = x.FirstRegistration.ToString(),
+                    EnginePower = x.Engine.HorsePower,
+                    EngineVolume = x.Engine.Volume
+                })
+                .ToList();
+            return listedCars;
         }
 
         public async Task<IEnumerable<BodyType>> GetBodyTypes()
@@ -47,3 +63,6 @@ namespace OnlineCarMarket_Core.Services.CarServ
         }
     }
 }
+
+
+
