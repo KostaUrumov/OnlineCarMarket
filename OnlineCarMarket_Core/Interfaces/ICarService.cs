@@ -18,6 +18,10 @@ namespace OnlineCarMarket_Core.Interfaces
         List<DisplayCarModel> LastFiveAddedCars();
         List<DisplayCarModel> searchCars(SearchCarViewModel model);
 
+        List<DisplayCarModel> searchByManifacture(SearchCarByManifactureModel model);
+
+        List<DisplayCarModel> searchByFuel(SearchCarByFuelTypeModel model);
+
 
 
     }

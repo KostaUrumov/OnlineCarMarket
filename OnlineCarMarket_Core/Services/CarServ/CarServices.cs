@@ -90,11 +90,147 @@ namespace OnlineCarMarket_Core.Services.CarServ
             return listedCars;
         }
 
-        public List<DisplayCarModel> searchCars(SearchCarViewModel model)
+        public List<DisplayCarModel> searchByFuel(SearchCarByFuelTypeModel model)
+        {
+            List<DisplayCarModel> displayCarModels = data
+               .Cars
+               .Where(m => m.Engine.EngineTypeId == model.EngineTypeId)
+               .Select(m => new DisplayCarModel()
+               {
+                   Model = m.Model,
+                   Manifacturer = m.Manifacturer.Name,
+                   FirstRegistration = m.FirstRegistration.ToString("dd/MM/yyyy"),
+                   EngineVolume = m.Engine.Volume,
+                   EnginePower = m.Engine.HorsePower,
+                   Price = m.Price.ToString("#.##")
+               })
+               .ToList();
+
+            return displayCarModels;
+
+        }
+
+        public List<DisplayCarModel> searchByManifacture(SearchCarByManifactureModel model)
         {
             List<DisplayCarModel> displayCarModels = data
                 .Cars
                 .Where(m => m.ManifacturerId == model.ManifacturerId)
+                .Select(m => new DisplayCarModel()
+                {
+                    Model = m.Model,
+                    Manifacturer = m.Manifacturer.Name,
+                    FirstRegistration = m.FirstRegistration.ToString("dd/MM/yyyy"),
+                    EngineVolume = m.Engine.Volume,
+                    EnginePower = m.Engine.HorsePower,
+                    Price = m.Price.ToString("#.##")
+                })
+                .ToList();
+
+            return displayCarModels;
+
+
+        }
+
+        public List<DisplayCarModel> searchCars(SearchCarViewModel model)
+        {
+            List<DisplayCarModel> displayCarModels;
+
+            decimal minPrice = 0;
+            decimal maxPrice = 0;
+            int minimumDate = 0;
+            if (model.RegisteredAfter != null)
+            {
+                minimumDate = int.Parse(model.RegisteredAfter);
+            }
+
+            if (model.MaximumPrice != 0)
+            {
+                maxPrice = model.MaximumPrice;
+            }
+
+            if (model.MinimumPrice != 0)
+            {
+                minPrice = model.MinimumPrice;
+            }
+
+            if (minPrice == 0)
+            {
+                displayCarModels = data
+                .Cars
+                .Where(m => m.ManifacturerId == model.ManifacturerId
+                && m.Engine.EngineTypeId == model.EngineTypeId)
+                .Where(m => m.Price <= maxPrice)
+                .Where(m => m.FirstRegistration.Year >= minimumDate)
+                .Where(m => m.Engine.HorsePower >= model.MinimumPower)
+                .Select(m => new DisplayCarModel()
+                {
+                    Model = m.Model,
+                    Manifacturer = m.Manifacturer.Name,
+                    FirstRegistration = m.FirstRegistration.ToString("dd/MM/yyyy"),
+                    EngineVolume = m.Engine.Volume,
+                    EnginePower = m.Engine.HorsePower,
+                    Price = m.Price.ToString("#.##")
+                })
+                .ToList();
+
+                return displayCarModels;
+            }
+
+
+            if (maxPrice == 0)
+            {
+                displayCarModels = data
+                .Cars
+                .Where(m => m.ManifacturerId == model.ManifacturerId
+                && m.Engine.EngineTypeId == model.EngineTypeId)
+                .Where(m => m.Price >= minPrice)
+                .Where(m => m.FirstRegistration.Year >= minimumDate)
+                .Where(m => m.Engine.HorsePower >= model.MinimumPower)
+                .Select(m => new DisplayCarModel()
+                {
+                    Model = m.Model,
+                    Manifacturer = m.Manifacturer.Name,
+                    FirstRegistration = m.FirstRegistration.ToString("dd/MM/yyyy"),
+                    EngineVolume = m.Engine.Volume,
+                    EnginePower = m.Engine.HorsePower,
+                    Price = m.Price.ToString("#.##")
+                })
+                .ToList();
+
+                return displayCarModels;
+            }
+
+            if (maxPrice == 0 && minPrice == 0)
+            {
+                displayCarModels = data
+                .Cars
+                .Where(m => m.ManifacturerId == model.ManifacturerId
+                && m.Engine.EngineTypeId == model.EngineTypeId)
+                .Where(m => m.FirstRegistration.Year >= minimumDate)
+                .Where(m => m.Engine.HorsePower >= model.MinimumPower)
+                .Select(m => new DisplayCarModel()
+                {
+                    Model = m.Model,
+                    Manifacturer = m.Manifacturer.Name,
+                    FirstRegistration = m.FirstRegistration.ToString("dd/MM/yyyy"),
+                    EngineVolume = m.Engine.Volume,
+                    EnginePower = m.Engine.HorsePower,
+                    Price = m.Price.ToString("#.##")
+                })
+                .ToList();
+
+                return displayCarModels;
+           }
+            
+          
+
+            displayCarModels = data
+                .Cars
+                .Where(m => m.ManifacturerId == model.ManifacturerId 
+                && m.Engine.EngineTypeId == model.EngineTypeId)
+                .Where(m=> m.Price<= maxPrice && m.Price >=minPrice)
+                .Where(m=> m.FirstRegistration.Year>= minimumDate)
+                .Where(m => m.Engine.HorsePower >= model.MinimumPower)
                 .Select(m => new DisplayCarModel()
                 {
                     Model = m.Model,
