@@ -60,6 +60,11 @@ namespace OnlineCarMarket_Core.Services.CarServ
             return await data.Engines.ToListAsync();
         }
 
+        public async Task<IEnumerable<EngineType>> GetFuel()
+        {
+            return await data.EngineTypes.ToListAsync();
+        }
+
         public async Task<IEnumerable<Manifacturer>> GetManifacturers()
         {
             return await data.Manifacturers.OrderBy(x => x.Name).ToListAsync();
@@ -78,11 +83,31 @@ namespace OnlineCarMarket_Core.Services.CarServ
                     EnginePower = x.Engine.HorsePower,
                     EngineVolume = x.Engine.Volume,
                     Price = x.Price.ToString("#.##")
-        })
+                })
                 .Take(5)
                 .ToList();
 
             return listedCars;
+        }
+
+        public List<DisplayCarModel> searchCars(SearchCarViewModel model)
+        {
+            List<DisplayCarModel> displayCarModels = data
+                .Cars
+                .Where(m => m.ManifacturerId == model.ManifacturerId)
+                .Select(m => new DisplayCarModel()
+                {
+                    Model = m.Model,
+                    Manifacturer = m.Manifacturer.Name,
+                    FirstRegistration = m.FirstRegistration.ToString("dd/MM/yyyy"),
+                    EngineVolume = m.Engine.Volume,
+                    EnginePower = m.Engine.HorsePower,
+                    Price= m.Price.ToString("#.##")
+                })
+                .ToList();
+
+            return displayCarModels;
+           
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model List<DisplayCarModel>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Result of your search";
 }
 
 <div class="text-center">
@@ -12,7 +12,7 @@
     @foreach (var car in Model)
     {
         <div class="card col-4" style="width: 20rem;">
-            <div class="card-body, bg-warning text-black">
+            <div class="card-body, bg-success text-white">
                 <p class="mb-0">Model: @car.Model</p>
                 <p class="mb-0">Manifacturer: @car.Manifacturer</p>
                 <p class="mb-0">Registered on: @car.FirstRegistration</p>
@@ -23,5 +23,3 @@
         </div>
     }
 </div>
-
-

@@ -12,8 +12,12 @@ namespace OnlineCarMarket_Core.Interfaces
 
         Task<IEnumerable<Manifacturer>> GetManifacturers();
 
+        Task<IEnumerable<EngineType>> GetFuel();
+
         List<DisplayCarModel> GetAllCars();
         List<DisplayCarModel> LastFiveAddedCars();
+        List<DisplayCarModel> searchCars(SearchCarViewModel model);
+
 
 
     }

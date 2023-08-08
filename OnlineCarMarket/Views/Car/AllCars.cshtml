@@ -8,12 +8,13 @@
     <h2>All Cars</h2>
 </div>
 
-<div class="text-center row">
+<div>
+    
     @foreach (var car in Model)
     {
         <div class="card col-4" style="width: 20rem;">
-            <div class="card-body">
-                <p class="mb-0">Model: @car.Model</p>
+            <div class="card-body, bg-danger text-white">
+                <p class= "mb-0" >Model: @car.Model</p>
                 <p class="mb-0">Manifacturer: @car.Manifacturer</p>
                 <p class="mb-0">Registered on: @car.FirstRegistration</p>
                 <p class="mb-0">Engine volume: @car.EngineVolume</p>
@@ -23,6 +24,8 @@
         </div>
     }
 </div>
+
+
 
    
 

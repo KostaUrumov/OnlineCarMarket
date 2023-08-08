@@ -48,5 +48,30 @@ namespace OnlineCarMarket.Controllers
 
             return View(carServices.GetAllCars());
         }
+
+        [HttpGet]
+        public async Task <IActionResult> FilterCar()
+        {
+            SearchCarViewModel model = new SearchCarViewModel()
+            {
+                Manifacturers = await carServices.GetManifacturers(),
+                EngineType = await carServices.GetFuel()
+            };
+            return View(model);
+
+        }
+
+        [HttpPost]
+        public  IActionResult FilterCar(SearchCarViewModel model)
+        {
+            var filteredcars = carServices.searchCars(model);
+            return View(nameof(Result), filteredcars);
+        }
+
+        public IActionResult Result(List<DisplayCarModel> models)
+        {
+            return View(models);
+        }
+
     }
 }
