@@ -26,8 +26,9 @@ namespace OnlineCarMarket.Controllers
             {
                 BodyTypes = await carServices.GetBodyTypes(),
                 Engine = await carServices.GetEngines(),
-                Manifacturers = await carServices.GetManifacturers()
-            };
+                Manifacturers = await carServices.GetManifacturers(),
+                FirstRegistration = new DateTime(2010, 1, 1)
+        };
 
             return View(model);
         }

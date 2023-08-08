@@ -31,7 +31,7 @@ namespace OnlineCarMarket_Core.Services.CarServ
 
         }
 
-        public async Task<IEnumerable<DisplayCarModel>> GetAllCars()
+        public List<DisplayCarModel> GetAllCars()
         {
            List<DisplayCarModel> listedCars = data
                 .Cars
@@ -39,7 +39,7 @@ namespace OnlineCarMarket_Core.Services.CarServ
                 {
                     Model = x.Model,
                     Manifacturer = x.Manifacturer.Name,
-                    FirstRegistration = x.FirstRegistration.ToString(),
+                    FirstRegistration = x.FirstRegistration.ToString("dd/MM/yyyy"),
                     EnginePower = x.Engine.HorsePower,
                     EngineVolume = x.Engine.Volume
                 })
