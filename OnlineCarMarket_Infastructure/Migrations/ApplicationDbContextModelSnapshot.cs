@@ -243,6 +243,10 @@ namespace OnlineCarMarket_Infastructure.Migrations
                     b.Property<int>("NumberOfDoors")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Price")
+                        .HasPrecision(38, 18)
+                        .HasColumnType("decimal(38,18)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BodyTypeId");

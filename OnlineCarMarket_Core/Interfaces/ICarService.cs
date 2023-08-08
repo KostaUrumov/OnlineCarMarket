@@ -13,6 +13,7 @@ namespace OnlineCarMarket_Core.Interfaces
         Task<IEnumerable<Manifacturer>> GetManifacturers();
 
         List<DisplayCarModel> GetAllCars();
+        List<DisplayCarModel> LastFiveAddedCars();
 
 
     }

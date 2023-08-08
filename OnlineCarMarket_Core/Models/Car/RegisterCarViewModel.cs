@@ -31,6 +31,8 @@ namespace OnlineCarMarket_Core.Models.Car
 
         public int NumberOfDoors { get; set; }
 
-        
+        public decimal Price { get; set; }
+
+
     }
 }

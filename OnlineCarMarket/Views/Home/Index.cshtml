@@ -1,5 +1,27 @@
-﻿@{
+﻿@model List<DisplayCarModel>
+
+@{
     ViewData["Title"] = "Home Page";
 }
+
+<div class="text-center">
+    <h2>@ViewBag.Title</h2>
+</div>
+
+<div class="text-center row">
+    @foreach (var car in Model)
+    {
+        <div class="card col-4" style="width: 20rem;">
+            <div class="card-body">
+                <p class="mb-0">Model: @car.Model</p>
+                <p class="mb-0">Manifacturer: @car.Manifacturer</p>
+                <p class="mb-0">Registered on: @car.FirstRegistration</p>
+                <p class="mb-0">Engine volume: @car.EngineVolume</p>
+                <p class="mb-0">Engine power: @car.EnginePower</p>
+                <p class="mb-0">Price: @car.Price</p>
+            </div>
+        </div>
+    }
+</div>
 
 

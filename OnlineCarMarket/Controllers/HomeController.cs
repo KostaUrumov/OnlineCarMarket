@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineCarMarket.Models;
+using OnlineCarMarket_Core.Interfaces;
 using System.Diagnostics;
 
 namespace OnlineCarMarket.Controllers
@@ -7,21 +8,21 @@ namespace OnlineCarMarket.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ICarService carService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(
+            ILogger<HomeController> logger,
+            ICarService _carService)
         {
             _logger = logger;
+            carService = _carService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(carService.LastFiveAddedCars());
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

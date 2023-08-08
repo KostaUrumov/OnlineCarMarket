@@ -7,5 +7,6 @@
         public string FirstRegistration { get; set; } = null!;
         public int EngineVolume { get; set; }
         public int EnginePower { get; set; }
+        public string Price { get; set; }
     }
 }

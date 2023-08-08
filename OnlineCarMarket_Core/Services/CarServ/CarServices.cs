@@ -24,6 +24,7 @@ namespace OnlineCarMarket_Core.Services.CarServ
                 EngineId = model.EngineId,
                 FirstRegistration = model.FirstRegistration,
                 NumberOfDoors = model.NumberOfDoors,
+                Price = model.Price
                 
             };
             data.Cars.Add(auto);
@@ -41,7 +42,9 @@ namespace OnlineCarMarket_Core.Services.CarServ
                     Manifacturer = x.Manifacturer.Name,
                     FirstRegistration = x.FirstRegistration.ToString("dd/MM/yyyy"),
                     EnginePower = x.Engine.HorsePower,
-                    EngineVolume = x.Engine.Volume
+                    EngineVolume = x.Engine.Volume,
+                    Price = x.Price.ToString("#.##")
+
                 })
                 .ToList();
             return listedCars;
@@ -59,7 +62,27 @@ namespace OnlineCarMarket_Core.Services.CarServ
 
         public async Task<IEnumerable<Manifacturer>> GetManifacturers()
         {
-            return await data.Manifacturers.ToListAsync();
+            return await data.Manifacturers.OrderBy(x => x.Name).ToListAsync();
+        }
+
+        public List<DisplayCarModel> LastFiveAddedCars()
+        {
+            List<DisplayCarModel> listedCars = data
+                .Cars
+                .OrderByDescending(x => x.Id)
+                .Select(x => new DisplayCarModel()
+                {
+                    Model = x.Model,
+                    Manifacturer = x.Manifacturer.Name,
+                    FirstRegistration = x.FirstRegistration.ToString("dd/MM/yyyy"),
+                    EnginePower = x.Engine.HorsePower,
+                    EngineVolume = x.Engine.Volume,
+                    Price = x.Price.ToString("#.##")
+        })
+                .Take(5)
+                .ToList();
+
+            return listedCars;
         }
     }
 }

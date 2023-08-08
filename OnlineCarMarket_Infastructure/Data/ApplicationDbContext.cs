@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnlineCarMarket_Infastructure.Entities;
+using System.Reflection.Emit;
+using System.Xml;
 
 namespace OnlineCarMarket_Infastructure.Data
 {
@@ -13,6 +15,11 @@ namespace OnlineCarMarket_Infastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Car>()
+                .Property(e => e.Price)
+                .HasPrecision(38, 18);
+
+
             builder.Entity<Country>()
                 .HasData
                 (
@@ -84,8 +91,8 @@ namespace OnlineCarMarket_Infastructure.Data
                     new Engine { Id = 7, EngineTypeId = 4, FuelConsumption = 14.5, HorsePower = 184, ManifacturerId = 3, Volume = 2700 },
                     new Engine { Id = 8, EngineTypeId = 6, FuelConsumption = 2.6, HorsePower = 186, ManifacturerId = 4, Volume = 600 },
                     new Engine { Id = 9, EngineTypeId = 1, FuelConsumption = 6.7, HorsePower = 118, ManifacturerId = 9, Volume = 1500 }
-
-                );
+            );
+            
 
             base.OnModelCreating(builder);
         }

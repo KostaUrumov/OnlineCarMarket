@@ -35,5 +35,8 @@ namespace OnlineCarMarket_Infastructure.Entities
         public DateTime FirstRegistration { get; set; }
 
         public int NumberOfDoors { get; set; }
+
+        [Required]
+        public decimal Price { get; set; }
     }
 }

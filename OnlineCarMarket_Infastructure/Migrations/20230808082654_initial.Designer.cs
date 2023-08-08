@@ -12,14 +12,14 @@ using OnlineCarMarket_Infastructure.Data;
 namespace OnlineCarMarket_Infastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230806125246_IdentityUpdate")]
-    partial class IdentityUpdate
+    [Migration("20230808082654_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("ProductVersion", "6.0.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -223,17 +223,14 @@ namespace OnlineCarMarket_Infastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool>("AciveVignette")
-                        .HasColumnType("bit");
-
                     b.Property<int>("BodyTypeId")
                         .HasColumnType("int");
 
                     b.Property<int>("EngineId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsRegistered")
-                        .HasColumnType("bit");
+                    b.Property<DateTime>("FirstRegistration")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("ManifacturerId")
                         .HasColumnType("int");
@@ -248,8 +245,9 @@ namespace OnlineCarMarket_Infastructure.Migrations
                     b.Property<int>("NumberOfDoors")
                         .HasColumnType("int");
 
-                    b.Property<bool>("RightHanded")
-                        .HasColumnType("bit");
+                    b.Property<decimal>("Price")
+                        .HasPrecision(38, 18)
+                        .HasColumnType("decimal(38,18)");
 
                     b.HasKey("Id");
 
@@ -366,6 +364,89 @@ namespace OnlineCarMarket_Infastructure.Migrations
                     b.HasIndex("ManifacturerId");
 
                     b.ToTable("Engines");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EngineTypeId = 1,
+                            FuelConsumption = 10.800000000000001,
+                            HorsePower = 150,
+                            ManifacturerId = 1,
+                            Volume = 2000
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EngineTypeId = 2,
+                            FuelConsumption = 7.4000000000000004,
+                            HorsePower = 140,
+                            ManifacturerId = 8,
+                            Volume = 1800
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EngineTypeId = 1,
+                            FuelConsumption = 6.4000000000000004,
+                            HorsePower = 90,
+                            ManifacturerId = 13,
+                            Volume = 1100
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EngineTypeId = 2,
+                            FuelConsumption = 2.2000000000000002,
+                            HorsePower = 80,
+                            ManifacturerId = 4,
+                            Volume = 900
+                        },
+                        new
+                        {
+                            Id = 5,
+                            EngineTypeId = 3,
+                            FuelConsumption = 1.0,
+                            HorsePower = 90,
+                            ManifacturerId = 7,
+                            Volume = 500
+                        },
+                        new
+                        {
+                            Id = 6,
+                            EngineTypeId = 2,
+                            FuelConsumption = 5.2999999999999998,
+                            HorsePower = 124,
+                            ManifacturerId = 1,
+                            Volume = 1600
+                        },
+                        new
+                        {
+                            Id = 7,
+                            EngineTypeId = 4,
+                            FuelConsumption = 14.5,
+                            HorsePower = 184,
+                            ManifacturerId = 3,
+                            Volume = 2700
+                        },
+                        new
+                        {
+                            Id = 8,
+                            EngineTypeId = 6,
+                            FuelConsumption = 2.6000000000000001,
+                            HorsePower = 186,
+                            ManifacturerId = 4,
+                            Volume = 600
+                        },
+                        new
+                        {
+                            Id = 9,
+                            EngineTypeId = 1,
+                            FuelConsumption = 6.7000000000000002,
+                            HorsePower = 118,
+                            ManifacturerId = 9,
+                            Volume = 1500
+                        });
                 });
 
             modelBuilder.Entity("OnlineCarMarket_Infastructure.Entities.EngineType", b =>
