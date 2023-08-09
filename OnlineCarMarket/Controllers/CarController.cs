@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineCarMarket_Core.Interfaces;
 using OnlineCarMarket_Core.Models.Car;
 using OnlineCarMarket_Core.Services.CarServ;
@@ -20,6 +21,7 @@ namespace OnlineCarMarket.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> AddCar()
         {
             RegisterCarViewModel model = new RegisterCarViewModel()
@@ -35,6 +37,7 @@ namespace OnlineCarMarket.Controllers
 
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddCar(RegisterCarViewModel model)
         {
 

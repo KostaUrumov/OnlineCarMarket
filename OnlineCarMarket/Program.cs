@@ -30,6 +30,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<ICarService, CarServices>();
 
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminsOnly", policy => policy.RequireRole("Admin"));
+});
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/User/Login";
@@ -57,6 +63,14 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+});
 
 app.MapControllerRoute(
     name: "default",
