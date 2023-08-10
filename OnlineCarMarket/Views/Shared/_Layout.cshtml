@@ -33,6 +33,14 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Country" asp-action="AddCountry">New Country</a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="BodyType" asp-action="AddBody">New BodyType</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Manifacturer" asp-action="AddBrand">New Brand</a>
+                        </li>
+
                     }
 
                     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("User"))

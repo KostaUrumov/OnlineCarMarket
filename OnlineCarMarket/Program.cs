@@ -7,6 +7,8 @@ using OnlineCarMarket_Core.Services.UserServ;
 using Microsoft.AspNetCore.Identity;
 using OnlineCarMarket_Core.Services.EngServ;
 using OnlineCarMarket_Core.Services.ContServ;
+using OnlineCarMarket_Core.Services.BodyServ;
+using OnlineCarMarket_Core.Services.ManServ;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +37,8 @@ builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<ICarService, CarServices>();
 builder.Services.AddScoped<IEngine, EngineServices>();
 builder.Services.AddScoped<ICountry, CountryServices>();
+builder.Services.AddScoped<IBody, BodyTypeServices>();
+builder.Services.AddScoped<IManifacturer, ManifacturerServices> ();
 
 
 
