@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineCarMarket_Core.Interfaces;
 using OnlineCarMarket_Core.Models.Car;
-using OnlineCarMarket_Core.Services.CarServ;
 using OnlineCarMarket_Infastructure.Data;
 
 namespace OnlineCarMarket.Controllers

@@ -10,5 +10,7 @@ namespace OnlineCarMarket_Core.Interfaces
 
         Task LogInAsync(LogInUserViewModel model);
 
+        Task AddToRole(RegisterUserViewModel model);
+
     }
 }

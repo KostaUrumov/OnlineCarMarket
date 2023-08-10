@@ -12,8 +12,8 @@ using OnlineCarMarket_Infastructure.Data;
 namespace OnlineCarMarket_Infastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230808082654_initial")]
-    partial class initial
+    [Migration("20230810072104_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,22 @@ namespace OnlineCarMarket_Infastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
+                            ConcurrencyStamp = "8bd1d986-7046-458a-a3c8-53a4d1c49ad3",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2c93174e-3b0e-446f-86af-883d56fr7210",
+                            ConcurrencyStamp = "090bd56d-cc86-4a51-bce4-0cf91690d0a7",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -34,6 +34,8 @@ namespace OnlineCarMarket.Controllers
             {
                 await userServices.AddUserAsync(model);
             }
+
+            await userServices.AddToRole(model);
             
             return RedirectToAction( "Index","Home" );
         }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OnlineCarMarket_Infastructure.Migrations
 {
-    public partial class initial : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -212,7 +212,7 @@ namespace OnlineCarMarket_Infastructure.Migrations
                         column: x => x.CountryId,
                         principalTable: "Countries",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -235,13 +235,13 @@ namespace OnlineCarMarket_Infastructure.Migrations
                         column: x => x.EngineTypeId,
                         principalTable: "EngineTypes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Engines_Manifacturers_ManifacturerId",
                         column: x => x.ManifacturerId,
                         principalTable: "Manifacturers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -273,13 +273,22 @@ namespace OnlineCarMarket_Infastructure.Migrations
                         column: x => x.EngineId,
                         principalTable: "Engines",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Cars_Manifacturers_ManifacturerId",
                         column: x => x.ManifacturerId,
                         principalTable: "Manifacturers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "2c5e174e-3b0e-446f-86af-483d56fd7210", "8bd1d986-7046-458a-a3c8-53a4d1c49ad3", "Admin", "ADMIN" },
+                    { "2c93174e-3b0e-446f-86af-883d56fr7210", "090bd56d-cc86-4a51-bce4-0cf91690d0a7", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(

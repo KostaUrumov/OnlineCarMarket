@@ -4,6 +4,8 @@ using OnlineCarMarket_Infastructure.Entities;
 using OnlineCarMarket_Core.Interfaces;
 using OnlineCarMarket_Core.Services.CarServ;
 using OnlineCarMarket_Core.Services.UserServ;
+using Microsoft.AspNetCore.Identity;
+using OnlineCarMarket_Core.Services.EngServ;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,11 +26,14 @@ builder.Services.AddDefaultIdentity<User>
         options.Password.RequireUppercase = false;
         options.User.RequireUniqueEmail = true;
     })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<ICarService, CarServices>();
+builder.Services.AddScoped<IEngine, EngineServices>();
+
 
 
 builder.Services.AddAuthorization(options =>
