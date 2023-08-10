@@ -1,0 +1,29 @@
+﻿@model AddCountryViewModel
+@{
+    ViewData["Title"] = "Add a new Country";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" asp-route-returnUrl="" method="post">
+            <h2>Add New Country to the database.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-floating">
+                <input asp-for="@Model.Name" class="form-control" autocomplete="model" aria-required="true" />
+                <label asp-for="@Model.Name">Name</label>
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
+            </div>
+
+            <p> </p>
+
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Add Country</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

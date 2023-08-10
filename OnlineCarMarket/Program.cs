@@ -6,6 +6,7 @@ using OnlineCarMarket_Core.Services.CarServ;
 using OnlineCarMarket_Core.Services.UserServ;
 using Microsoft.AspNetCore.Identity;
 using OnlineCarMarket_Core.Services.EngServ;
+using OnlineCarMarket_Core.Services.ContServ;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,12 +34,18 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<ICarService, CarServices>();
 builder.Services.AddScoped<IEngine, EngineServices>();
+builder.Services.AddScoped<ICountry, CountryServices>();
 
 
 
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminsOnly", policy => policy.RequireRole("Admin"));
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("UsersOnly", policy => policy.RequireRole("User"));
 });
 
 builder.Services.ConfigureApplicationCookie(options =>

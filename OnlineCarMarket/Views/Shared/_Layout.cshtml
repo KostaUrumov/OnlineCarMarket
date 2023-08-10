@@ -29,10 +29,17 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Engine" asp-action="AddNewEngine">New Engine</a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Country" asp-action="AddCountry">New Country</a>
+                        </li>
+
                     }
 
                     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("User"))
                     {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="AddCar">Add new car</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="FilterCar">Search</a>
                         </li>

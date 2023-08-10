@@ -6,6 +6,7 @@ using OnlineCarMarket_Infastructure.Data;
 
 namespace OnlineCarMarket.Controllers
 {
+    [Authorize(Policy = "UsersOnly")]
     public class CarController : Controller
     {
         private readonly ApplicationDbContext data;

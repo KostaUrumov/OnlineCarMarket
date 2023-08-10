@@ -5,7 +5,7 @@ using OnlineCarMarket_Core.Models.Engines;
 
 namespace OnlineCarMarket.Controllers
 {
-    [Authorize]
+    
     [Authorize(Policy = "AdminsOnly")]
     public class EngineController : Controller
     {
