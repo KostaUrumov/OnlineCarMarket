@@ -16,7 +16,7 @@ namespace OnlineCarMarket_Core.Interfaces
 
         Task<IEnumerable<EngineType>> GetFuel();
 
-        List<DisplayCarModel> GetAllCars();
+        Task<List<DisplayCarModel>> GetAllCars(string userId);
         List<DisplayCarModel> LastFiveAddedCars();
         List<DisplayCarModel> searchCars(SearchCarViewModel model);
 
@@ -24,9 +24,12 @@ namespace OnlineCarMarket_Core.Interfaces
 
         List<DisplayCarModel> searchByFuel(SearchCarByFuelTypeModel model);
 
-        Task OserveCar(int carId, string userId);
+        Task ObserveCar(int carId, string userId);
+        Task RemoveOberveCar(int carId, string userId);
 
         Task<List<DisplayCarModel>> GetMyObservingCars(string userId);
+
+        Task<List<DisplayCarModel>> CheckIfCarAreObservedByUser(string userId, List<DisplayCarModel> list);
 
 
 

@@ -51,10 +51,11 @@ namespace OnlineCarMarket.Controllers
             return RedirectToAction(nameof(MyCars));
         }
 
-        public IActionResult AllCars()
+        public async Task<IActionResult> AllCars()
         {
-
-            return View(carServices.GetAllCars());
+            var userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            List<DisplayCarModel> listedCars = await carServices.GetAllCars(userId);
+            return View(await carServices.CheckIfCarAreObservedByUser(userId, listedCars));
         }
 
         [HttpGet]
@@ -125,13 +126,14 @@ namespace OnlineCarMarket.Controllers
         public async Task<IActionResult> MyCars()
         {
             var userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
             return View(await carServices.GetMyCars(userId));
         }
 
         public async Task<IActionResult> ObserveCar(int carId)
         {
             var userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            await carServices.OserveCar(carId, userId);
+            await carServices.ObserveCar(carId, userId);
             return RedirectToAction(nameof(MyObservCars));
         }
 
@@ -139,6 +141,13 @@ namespace OnlineCarMarket.Controllers
         {
             var userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             return View(await carServices.GetMyObservingCars(userId));
+        }
+
+        public async Task<IActionResult> RemoveFromObserved(int carId)
+        {
+            var userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            await carServices.RemoveOberveCar(carId, userId);
+            return RedirectToAction(nameof(MyObservCars));
         }
 
     }
