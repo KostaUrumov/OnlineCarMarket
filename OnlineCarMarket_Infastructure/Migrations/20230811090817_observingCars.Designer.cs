@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineCarMarket_Infastructure.Data;
 
@@ -11,9 +12,10 @@ using OnlineCarMarket_Infastructure.Data;
 namespace OnlineCarMarket_Infastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230811090817_observingCars")]
+    partial class observingCars
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,14 +54,14 @@ namespace OnlineCarMarket_Infastructure.Migrations
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "b2c556e9-a896-4195-a808-ea62f62f5ded",
+                            ConcurrencyStamp = "1f930321-ec3d-4818-b8c0-a54064dd7a12",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2c93174e-3b0e-446f-86af-883d56fr7210",
-                            ConcurrencyStamp = "43d84c41-124c-4408-bfc1-fbfc8b861dad",
+                            ConcurrencyStamp = "34a3e80b-1dca-4c75-91c3-4a990868adce",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -263,6 +265,9 @@ namespace OnlineCarMarket_Infastructure.Migrations
                         .HasPrecision(38, 18)
                         .HasColumnType("decimal(38,18)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BodyTypeId");
@@ -270,6 +275,8 @@ namespace OnlineCarMarket_Infastructure.Migrations
                     b.HasIndex("EngineId");
 
                     b.HasIndex("ManifacturerId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Cars");
                 });
@@ -614,21 +621,6 @@ namespace OnlineCarMarket_Infastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("OnlineCarMarket_Infastructure.Entities.ObserveCars", b =>
-                {
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("CarId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ObservingCars");
-                });
-
             modelBuilder.Entity("OnlineCarMarket_Infastructure.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -788,6 +780,10 @@ namespace OnlineCarMarket_Infastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("OnlineCarMarket_Infastructure.Entities.User", null)
+                        .WithMany("Observing")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("BodyType");
 
                     b.Navigation("Engine");
@@ -825,7 +821,7 @@ namespace OnlineCarMarket_Infastructure.Migrations
                     b.Navigation("Country");
                 });
 
-            modelBuilder.Entity("OnlineCarMarket_Infastructure.Entities.ObserveCars", b =>
+            modelBuilder.Entity("OnlineCarMarket_Infastructure.Entities.UserCar", b =>
                 {
                     b.HasOne("OnlineCarMarket_Infastructure.Entities.Car", "Car")
                         .WithMany()
@@ -844,23 +840,9 @@ namespace OnlineCarMarket_Infastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("OnlineCarMarket_Infastructure.Entities.UserCar", b =>
+            modelBuilder.Entity("OnlineCarMarket_Infastructure.Entities.User", b =>
                 {
-                    b.HasOne("OnlineCarMarket_Infastructure.Entities.Car", "Car")
-                        .WithMany()
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OnlineCarMarket_Infastructure.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
-
-                    b.Navigation("User");
+                    b.Navigation("Observing");
                 });
 #pragma warning restore 612, 618
         }

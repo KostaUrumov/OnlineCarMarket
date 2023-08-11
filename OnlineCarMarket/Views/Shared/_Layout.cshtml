@@ -19,9 +19,6 @@
                 </button>
 
                 <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
 
                     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin"))
                     {
@@ -55,10 +52,17 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="AllCars">All cars</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="MyCars">My cars</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="MyObservCars">Observing Cars</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="GetAllByManifacture">Search By Brand</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="GetAllByFuelType">Search Fuel</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="GetAllByFuelType">Search by Fuel</a>
                         </li>
 
                     }

@@ -18,6 +18,13 @@ namespace OnlineCarMarket_Infastructure.Data
                 .Property(e => e.Price)
                 .HasPrecision(38, 18);
 
+            builder.Entity<UserCar>()
+                .HasKey(c => new { c.CarId, c.UserId });
+
+            builder.Entity<ObserveCars>()
+                .HasKey(c => new { c.CarId, c.UserId });
+
+
 
             builder.Entity<Country>()
                 .HasData
@@ -110,5 +117,7 @@ namespace OnlineCarMarket_Infastructure.Data
         public DbSet<Engine> Engines { get; set; } = null!;
         public DbSet<EngineType> EngineTypes { get; set; } = null!;
         public DbSet<Manifacturer> Manifacturers { get; set; } = null!;
+        public DbSet<UserCar> UsersCars { get; set; } = null!;
+        public DbSet<ObserveCars> ObservingCars { get; set; } = null!;
     }
 }

@@ -6,8 +6,7 @@
 <div class="row">
     <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="" method="post">
-            <h2>Add New Car in our Market.</h2>
-            <hr />
+            <h3>Add New Car to our Market.</h3>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="mb-3">
@@ -24,7 +23,7 @@
 
             <div class="form-floating">
                 <input asp-for="@Model.Type" class="form-control" autocomplete="model" aria-required="true" />
-                <label asp-for="@Model.Type">Model</label>
+                <label asp-for="@Model.Type"></label>
                 <span asp-validation-for="@Model.Type" class="text-danger"></span>
             </div>
 
@@ -52,7 +51,6 @@
             </div>
 
 
-
             <div class="form-floating">
                 <input asp-for="@Model.Milage" class="form-control" autocomplete="" aria-required="true" />
                 <label asp-for="@Model.Milage">Kilometers</label>
@@ -71,6 +69,7 @@
                 <label asp-for="@Model.NumberOfDoors">Number of doors</label>
                 <span asp-validation-for="@Model.NumberOfDoors" class="text-danger"></span>
             </div>
+            <p> </p>
 
             <div class="form-floating">
                 <input asp-for="@Model.Price" class="form-control" autocomplete="" aria-required="true" />

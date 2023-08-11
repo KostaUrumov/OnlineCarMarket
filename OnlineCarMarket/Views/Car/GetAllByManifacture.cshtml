@@ -6,19 +6,20 @@
 
 
 <div class="text-center">
-    <h2>Search for car/s by Brand</h2>
+    <h3>Search for car/s by Brand</h3>
 </div>
 
 
 <div class="row">
     <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="" method="post">
-            <h2>Search your car.</h2>
-            <hr />
+            <h3>Search your car.</h3>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="mb-3">
-                <label asp-for="@Model.ManifacturerId" class="form-label">Manifacturer</label>
+                <p></p>
+                <p></p>
+                <label asp-for="@Model.ManifacturerId" class="form-label">Select Brand</label>
                 <select asp-for="@Model.ManifacturerId" class="form-control">
                     @foreach (var manifacturer in Model.Manifacturers)
                     {

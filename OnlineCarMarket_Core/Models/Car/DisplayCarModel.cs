@@ -2,6 +2,7 @@
 {
     public class DisplayCarModel
     {
+        public int Id { get; set; }
         public string Model { get; set; } = null!;
         public string Manifacturer { get; set; } = null!;
         public string FirstRegistration { get; set; } = null!;

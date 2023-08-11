@@ -5,7 +5,9 @@ namespace OnlineCarMarket_Core.Interfaces
 {
     public interface ICarService
     {
-        Task AddCarAsync(RegisterCarViewModel model);
+        Task<Car> AddCarAsync(RegisterCarViewModel model);
+        Task AddToMyListAsync(Car model, string userId);
+        Task<List<DisplayCarModel>> GetMyCars(string userId);
 
         Task<IEnumerable<BodyType>> GetBodyTypes();
         Task<IEnumerable<Engine>> GetEngines();
@@ -21,6 +23,10 @@ namespace OnlineCarMarket_Core.Interfaces
         List<DisplayCarModel> searchByManifacture(SearchCarByManifactureModel model);
 
         List<DisplayCarModel> searchByFuel(SearchCarByFuelTypeModel model);
+
+        Task OserveCar(int carId, string userId);
+
+        Task<List<DisplayCarModel>> GetMyObservingCars(string userId);
 
 
 

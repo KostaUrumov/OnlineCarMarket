@@ -33,6 +33,7 @@ builder.Services.AddDefaultIdentity<User>
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+
 builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<ICarService, CarServices>();
 builder.Services.AddScoped<IEngine, EngineServices>();

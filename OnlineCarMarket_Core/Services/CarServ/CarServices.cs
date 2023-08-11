@@ -13,8 +13,9 @@ namespace OnlineCarMarket_Core.Services.CarServ
         {
             data = _data;
         }
-        public async Task AddCarAsync(RegisterCarViewModel model)
+        public async Task<Car> AddCarAsync(RegisterCarViewModel model)
         {
+            
             Car auto = new Car()
             {
                 ManifacturerId = model.ManifacturerId,
@@ -29,7 +30,21 @@ namespace OnlineCarMarket_Core.Services.CarServ
             };
             data.Cars.Add(auto);
             await data.SaveChangesAsync();
+            return auto;
 
+        }
+
+        public async Task AddToMyListAsync(Car car, string userId)
+        {
+            User user = data.Users.First(u => u.Id == userId);
+            UserCar usCar = new UserCar()
+            {
+                CarId = car.Id,
+                UserId = user.Id
+            };
+
+            data.UsersCars.Add(usCar);
+            await data.SaveChangesAsync();
         }
 
         public List<DisplayCarModel> GetAllCars()
@@ -38,6 +53,7 @@ namespace OnlineCarMarket_Core.Services.CarServ
                 .Cars
                 .Select(x => new DisplayCarModel()
                 {
+                    Id = x.Id,
                     Model = x.Model,
                     Manifacturer = x.Manifacturer.Name,
                     FirstRegistration = x.FirstRegistration.ToString("dd/MM/yyyy"),
@@ -70,6 +86,49 @@ namespace OnlineCarMarket_Core.Services.CarServ
             return await data.Manifacturers.OrderBy(x => x.Name).ToListAsync();
         }
 
+        public async Task<List<DisplayCarModel>> GetMyCars(string userId)
+        {
+            List<DisplayCarModel> listedCars = await data
+                .UsersCars
+                .Where(u => u.UserId == userId)
+                .Select(u => new DisplayCarModel()
+                {
+                    Model = u.Car.Model,
+                    Manifacturer = u.Car.Manifacturer.Name,
+                    FirstRegistration = u.Car.FirstRegistration.ToString("dd/MM/yyyy"),
+                    EnginePower = u.Car.Engine.HorsePower,
+                    EngineVolume = u.Car.Engine.Volume,
+                    Price = u.Car.Price.ToString("#.##")
+
+                })
+                .ToListAsync();
+
+            return listedCars;
+            
+        }
+
+        public async Task<List<DisplayCarModel>> GetMyObservingCars(string userId)
+        {
+            List<DisplayCarModel> listedCars = await data
+                .ObservingCars
+                .Where(u => u.UserId == userId)
+                .Select(u => new DisplayCarModel()
+                {
+                    Model = u.Car.Model,
+                    Manifacturer = u.Car.Manifacturer.Name,
+                    FirstRegistration = u.Car.FirstRegistration.ToString("dd/MM/yyyy"),
+                    EnginePower = u.Car.Engine.HorsePower,
+                    EngineVolume = u.Car.Engine.Volume,
+                    Price = u.Car.Price.ToString("#.##")
+
+                })
+                .ToListAsync();
+
+            return listedCars;
+
+
+        }
+
         public List<DisplayCarModel> LastFiveAddedCars()
         {
             List<DisplayCarModel> listedCars = data
@@ -88,6 +147,20 @@ namespace OnlineCarMarket_Core.Services.CarServ
                 .ToList();
 
             return listedCars;
+        }
+
+        public async Task OserveCar(int carId, string userId)
+        {
+            User user = data.Users.First(u => u.Id == userId);
+            Car car = data.Cars.First(c => c.Id == carId);
+            ObserveCars observeNewCar = new ObserveCars()
+            {
+                CarId = car.Id,
+                UserId = user.Id
+            };
+            data.ObservingCars.Add(observeNewCar);
+            await data.SaveChangesAsync();
+
         }
 
         public List<DisplayCarModel> searchByFuel(SearchCarByFuelTypeModel model)

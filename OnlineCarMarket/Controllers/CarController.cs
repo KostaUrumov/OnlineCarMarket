@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineCarMarket_Core.Interfaces;
 using OnlineCarMarket_Core.Models.Car;
 using OnlineCarMarket_Infastructure.Data;
+using System.Security.Claims;
 
 namespace OnlineCarMarket.Controllers
 {
@@ -40,10 +41,14 @@ namespace OnlineCarMarket.Controllers
         [Authorize]
         public async Task<IActionResult> AddCar(RegisterCarViewModel model)
         {
+            var userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (userId != null)
+            {
+                var car = await carServices.AddCarAsync(model);
+                await carServices.AddToMyListAsync(car, userId);
+            }
 
-            await carServices.AddCarAsync(model);
-
-            return RedirectToAction(nameof(AllCars));
+            return RedirectToAction(nameof(MyCars));
         }
 
         public IActionResult AllCars()
@@ -58,7 +63,8 @@ namespace OnlineCarMarket.Controllers
             SearchCarViewModel model = new SearchCarViewModel()
             {
                 Manifacturers = await carServices.GetManifacturers(),
-                EngineType = await carServices.GetFuel()
+                EngineType = await carServices.GetFuel(),
+                MaximumPrice = 100
             };
             return View(model);
 
@@ -113,6 +119,26 @@ namespace OnlineCarMarket.Controllers
             var filteredcars = carServices.searchByFuel(model);
             return View(nameof(Result), filteredcars);
 
+        }
+
+
+        public async Task<IActionResult> MyCars()
+        {
+            var userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            return View(await carServices.GetMyCars(userId));
+        }
+
+        public async Task<IActionResult> ObserveCar(int carId)
+        {
+            var userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            await carServices.OserveCar(carId, userId);
+            return RedirectToAction(nameof(MyObservCars));
+        }
+
+        public async Task<IActionResult> MyObservCars()
+        {
+            var userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            return View(await carServices.GetMyObservingCars(userId));
         }
 
     }
