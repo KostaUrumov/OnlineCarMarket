@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineCarMarket_Core.Interfaces;
 using OnlineCarMarket_Core.Models.Countres;
+using OnlineCarMarket_Infastructure.Entities;
 
 namespace OnlineCarMarket.Controllers
 {
@@ -21,7 +22,7 @@ namespace OnlineCarMarket.Controllers
         }
 
         [HttpGet]
-        public  IActionResult AddCountry()
+        public IActionResult AddCountry()
         {
             AddCountryViewModel model = new AddCountryViewModel();
             return View(model);
@@ -35,12 +36,40 @@ namespace OnlineCarMarket.Controllers
                 await countryService.AddCountryAsync(model);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(AllCountries));
         }
 
         public async Task<IActionResult> AllCountries()
         {
             return View(await countryService.GetAllCountries());
         }
+
+        [HttpPost]
+        public async Task<IActionResult> EditTheGivenCountry(EditCountryViewModel model)
+        {
+            await countryService.SaveNewCountry(model);
+            return RedirectToAction(nameof(AllCountries));
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditTheGivenCountry(int id)
+        {
+
+            List<EditCountryViewModel> models = await countryService.FindCountry(id);
+            return View(models[0]);
+
+        }
+
+        public async Task<IActionResult> SaveNewCountry(EditCountryViewModel model, string oldname)
+        {
+            
+            await countryService.SaveNewCountry(model);
+            return RedirectToAction(nameof(AllCountries));
+        }
+
+
+
+
     }
 }

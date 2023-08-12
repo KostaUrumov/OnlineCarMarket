@@ -16,10 +16,15 @@
 
     @foreach (var car in Model)
     {
-        <div class="card col-4" style="width: 20rem;">
-            <div class="card-body, bg-danger text-white">
+        <div class="card col-4" style="width: 15rem;">
+            <div class="card-body, bg-success text-white">
                 <p class="mb-0">Model: @car.Name</p>
             </div>
+            <p></p>
+            <div class="text-center">
+                <a asp-controller="Country" asp-action="EditTheGivenCountry" asp-route-id="@car.Id" class="btn btn-warning">Edit</a>
+            </div>
+            
         </div>
     }
 </div>

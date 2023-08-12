@@ -25,6 +25,23 @@ namespace OnlineCarMarket_Core.Services.ContServ
             await data.SaveChangesAsync();
         }
 
+        public async Task<List<EditCountryViewModel>> FindCountry(int countryId)
+        {
+            List<EditCountryViewModel> countryToEdit = await data
+                .Countries
+                .Where(c=>c.Id == countryId)
+                .Select(x=>new EditCountryViewModel()
+                {
+                    Name = x.Name,
+                    Id = x.Id
+                    
+                })
+                .ToListAsync();
+
+            return countryToEdit;
+           
+        }
+
         public async Task<List<ShowCountryModel>> GetAllCountries()
         {
             List<ShowCountryModel> countries = await data
@@ -38,6 +55,18 @@ namespace OnlineCarMarket_Core.Services.ContServ
                 .ToListAsync();
 
             return countries;
+        }
+
+        public async Task SaveNewCountry(EditCountryViewModel model)
+        {
+            List<Country> country = await data
+                .Countries
+                .Where(x => x.Id == model.Id)
+                .ToListAsync();
+
+            country[0].Name = model.Name;
+            await data.SaveChangesAsync();
+
         }
     }
 }
