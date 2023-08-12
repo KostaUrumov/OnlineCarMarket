@@ -1,0 +1,23 @@
+﻿@model List<ShowManufacturerViewModel>
+
+@{
+    ViewData["Title"] = "Brands";
+}
+
+<div class="text-center">
+    <h3>All Brands</h3>
+</div>
+
+<a class="nav-link text-dark text-center" asp-area="" asp-controller="Manifacturer" asp-action="AddBrand">New Brand</a>
+
+<div>
+
+    @foreach (var car in Model)
+    {
+        <div class="card col-4" style="width: 20rem;">
+            <div class="card-body, bg-danger text-white">
+                <p class="mb-0">Model: @car.Name</p>
+            </div>
+        </div>
+    }
+</div>

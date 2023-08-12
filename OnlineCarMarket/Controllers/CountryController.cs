@@ -37,5 +37,10 @@ namespace OnlineCarMarket.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<IActionResult> AllCountries()
+        {
+            return View(await countryService.GetAllCountries());
+        }
     }
 }

@@ -31,5 +31,20 @@ namespace OnlineCarMarket_Core.Services.ManServ
         {
             return await data.Countries.OrderBy(x=>x.Name).ToListAsync();
         }
+
+        public async Task<List<ShowManufacturerViewModel>> GetAllBrands()
+        {
+            List<ShowManufacturerViewModel> brands = await data
+                .Manifacturers
+                .Select(m=> new ShowManufacturerViewModel
+                {
+                    Name = m.Name,
+                    Id = m.Id
+                })
+                .OrderBy(x=>x.Name)
+                .ToListAsync();
+
+            return brands;
+        }
     }
 }

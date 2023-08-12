@@ -1,0 +1,25 @@
+﻿@model List<ShowCountryModel>
+
+@{
+    ViewData["Title"] = "Countries";
+}
+
+<div class="text-center">
+    <h3>All Countries</h3>
+</div>
+
+
+<a class="nav-link text-dark text-center" asp-area="" asp-controller="Country" asp-action="AddCountry">Add New Country</a>
+
+
+<div>
+
+    @foreach (var car in Model)
+    {
+        <div class="card col-4" style="width: 20rem;">
+            <div class="card-body, bg-danger text-white">
+                <p class="mb-0">Model: @car.Name</p>
+            </div>
+        </div>
+    }
+</div>

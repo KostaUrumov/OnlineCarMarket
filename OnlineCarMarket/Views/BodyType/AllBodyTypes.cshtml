@@ -1,0 +1,33 @@
+﻿@model List<ShowBodyTypes>
+
+@{
+    ViewData["Title"] = "Body Types";
+}
+
+<div class="text-center">
+    <h3>All Body Types</h3>
+</div>
+
+
+ <a class="nav-link text-dark text-center" asp-area="" asp-controller="BodyType" asp-action="AddBody">Add New BodyType</a>
+
+
+<div>
+    
+    @foreach (var car in Model)
+    {
+        <div class="card col-4" style="width: 20rem;">
+            <div class="card-body, bg-danger text-white">
+                <p class="mb-0">Model: @car.Name</p>
+                
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
+
+
+

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineCarMarket_Core.Models.Body;
 using OnlineCarMarket_Core.Interfaces;
+using System.Runtime.CompilerServices;
 
 namespace OnlineCarMarket.Controllers
 {
@@ -35,6 +36,11 @@ namespace OnlineCarMarket.Controllers
                 await bodyService.AddBodyAsync(model);
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> AllBodyTypes()
+        {
+            return View (await bodyService.GetAllBodyTypes());
         }
     }
 }

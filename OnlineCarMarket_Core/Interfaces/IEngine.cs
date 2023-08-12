@@ -8,5 +8,6 @@ namespace OnlineCarMarket_Core.Interfaces
         Task AddEngineAsync(AddEngineViewModel model);
         Task<IEnumerable<Manifacturer>> GetAllmanifacturers();
         Task<IEnumerable<EngineType>> GetEngineType();
+        Task<List<ShowEngineModelView>> GetAllEngines();
     }
 }

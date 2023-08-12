@@ -38,5 +38,11 @@ namespace OnlineCarMarket.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
+        public async Task<IActionResult> AllBrands()
+        {
+            return View(await manifacturerService.GetAllBrands());
+        }
+
     }
 }

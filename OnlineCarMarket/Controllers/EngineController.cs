@@ -48,6 +48,11 @@ namespace OnlineCarMarket.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<IActionResult> AllEngines()
+        {
+            return View(await engineService.GetAllEngines());
+        }
     }
 
 }

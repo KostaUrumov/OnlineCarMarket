@@ -7,5 +7,7 @@ namespace OnlineCarMarket_Core.Interfaces
     {
         Task<IEnumerable<Country>> GetAllCountries();
         Task AddBrandAsync(NewManufacturerViewModel model);
+
+        Task<List<ShowManufacturerViewModel>> GetAllBrands();
     }
 }

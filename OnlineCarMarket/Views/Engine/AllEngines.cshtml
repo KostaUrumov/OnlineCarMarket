@@ -1,0 +1,27 @@
+﻿@model List<ShowEngineModelView>
+
+@{
+    ViewData["Title"] = "Engines";
+}
+
+<div class="text-center">
+    <h3>All Brands</h3>
+</div>
+
+<a class="nav-link text-dark text-center" asp-area="" asp-controller="Engine" asp-action="AddNewEngine">New Engine</a>
+
+<div>
+
+    @foreach (var car in Model)
+    {
+        <div class="card col-4" style="width: 20rem;">
+            <div class="card-body, bg-danger text-white">
+                <p class="mb-0">Model: @car.Manufacturer</p>
+                <p class="mb-0">Model: @car.FuelType</p>
+                <p class="mb-0">Model: @car.HorsePower</p>
+                <p class="mb-0">Model: @car.Volume</p>
+                <p class="mb-0">Model: @car.Consumption</p>
+            </div>
+        </div>
+    }
+</div>

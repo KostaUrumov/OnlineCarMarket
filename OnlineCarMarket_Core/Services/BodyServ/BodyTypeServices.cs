@@ -1,4 +1,5 @@
-﻿using OnlineCarMarket_Core.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineCarMarket_Core.Interfaces;
 using OnlineCarMarket_Core.Models.Body;
 using OnlineCarMarket_Infastructure.Data;
 using OnlineCarMarket_Infastructure.Entities;
@@ -23,6 +24,20 @@ namespace OnlineCarMarket_Core.Services.BodyServ
 
             data.BoduTypes.Add(body);
             await data.SaveChangesAsync();
+        }
+
+        public async Task<List<ShowBodyTypes>> GetAllBodyTypes()
+        {
+            List<ShowBodyTypes> bodyTypes = await data
+                .BoduTypes
+                .Select(x => new ShowBodyTypes()
+                { 
+                    Name = x.Name
+                })
+                .OrderBy(x => x.Name)
+                .ToListAsync();
+
+            return bodyTypes;
         }
     }
 }
