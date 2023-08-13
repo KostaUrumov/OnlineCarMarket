@@ -95,7 +95,6 @@ namespace OnlineCarMarket.Controllers
         }
 
         [HttpPost]
-
         public IActionResult GetAllByManifacture(SearchCarByManifactureModel model)
         {
             var filteredcars = carServices.searchByManifacture(model);
@@ -148,6 +147,25 @@ namespace OnlineCarMarket.Controllers
             var userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             await carServices.RemoveOberveCar(carId, userId);
             return RedirectToAction(nameof(MyObservCars));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            List<EditCarViewModel> carToEdit = await carServices.FindCar(id);
+            carToEdit[0].Manifacturers = await carServices.GetManifacturers();
+            carToEdit[0].BodyTypes = await carServices.GetBodyTypes();
+            carToEdit[0].Engine = await carServices.GetEngines();
+
+            return View(carToEdit[0]);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditCarViewModel model)
+        {
+            await carServices.SaveChangesAsync(model);
+
+            return RedirectToAction(nameof(MyCars));
         }
 
     }

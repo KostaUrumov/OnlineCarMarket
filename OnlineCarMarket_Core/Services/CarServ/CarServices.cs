@@ -66,6 +66,26 @@ namespace OnlineCarMarket_Core.Services.CarServ
             
         }
 
+        public async Task<List<EditCarViewModel>> FindCar(int id)
+        {
+            List<EditCarViewModel> carToReturn = await data
+                .Cars
+                .Where(x=>x.Id == id)
+                .Select(x=> new EditCarViewModel()
+                {
+                    Id = x.Id,
+                    ManifacturerId = x.ManifacturerId,
+                    BodyTypeId = x.BodyTypeId,
+                    EngineId = x.EngineId,
+                    FirstRegistration = x.FirstRegistration,
+                    Milage = x.Milage,
+                    NumberOfDoors = x.NumberOfDoors,
+                    Price = x.Price
+                })
+                .ToListAsync();
+            return carToReturn;
+        }
+
         public async Task<List<DisplayCarModel>> GetAllCars(string userId)
         {
             List<DisplayCarModel> listedCars = await data
@@ -112,6 +132,7 @@ namespace OnlineCarMarket_Core.Services.CarServ
                 .Where(u => u.UserId == userId)
                 .Select(u => new DisplayCarModel()
                 {
+                    Id = u.CarId,
                     Model = u.Car.Model,
                     Manifacturer = u.Car.Manifacturer.Name,
                     FirstRegistration = u.Car.FirstRegistration.ToString("dd/MM/yyyy"),
@@ -194,6 +215,20 @@ namespace OnlineCarMarket_Core.Services.CarServ
             data.ObservingCars.RemoveRange(toRemove);
             await data.SaveChangesAsync();
            
+        }
+
+        public async Task SaveChangesAsync(EditCarViewModel model)
+        {
+            Car carToEdit = await data.Cars.FirstAsync(x => x.Id == model.Id);
+            carToEdit.ManifacturerId = model.ManifacturerId;
+            carToEdit.Model = model.Type;
+            carToEdit.EngineId = model.EngineId;
+            carToEdit.BodyTypeId = model.BodyTypeId;
+            carToEdit.FirstRegistration = model.FirstRegistration;
+            carToEdit.NumberOfDoors = model.NumberOfDoors;
+            carToEdit.Price = model.Price;
+
+           await data.SaveChangesAsync();  
         }
 
         public List<DisplayCarModel> searchByFuel(SearchCarByFuelTypeModel model)

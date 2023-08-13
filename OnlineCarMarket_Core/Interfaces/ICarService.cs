@@ -31,7 +31,9 @@ namespace OnlineCarMarket_Core.Interfaces
 
         Task<List<DisplayCarModel>> CheckIfCarAreObservedByUser(string userId, List<DisplayCarModel> list);
 
+        Task<List<EditCarViewModel>> FindCar(int id);
 
+        Task SaveChangesAsync(EditCarViewModel model);
 
     }
 }
