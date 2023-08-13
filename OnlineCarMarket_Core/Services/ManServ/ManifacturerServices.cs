@@ -39,12 +39,42 @@ namespace OnlineCarMarket_Core.Services.ManServ
                 .Select(m=> new ShowManufacturerViewModel
                 {
                     Name = m.Name,
-                    Id = m.Id
+                    Id = m.Id,
+                    Country = m.Country.Name
+                    
                 })
                 .OrderBy(x=>x.Name)
                 .ToListAsync();
 
             return brands;
+        }
+
+        public async Task<List<EditManufacturerViewModel>> FindBrandToBeEdited(int Id)
+        {
+            List<EditManufacturerViewModel> toDo = await data
+                .Manifacturers
+                .Where(x=>x.Id == Id)
+                .Select(m=> new EditManufacturerViewModel()
+                {
+                    Name = m.Name,
+                    CountryId = m.CountryId,
+                    Id = m.Id
+                })
+                .ToListAsync();
+            return toDo;
+        }
+
+        public async Task SaveChanges(EditManufacturerViewModel model)
+        {
+            List<Manifacturer> find = await data
+                .Manifacturers
+                .Where(x=>x.Id == model.Id)
+                .ToListAsync();
+
+            find[0].Name = model.Name;
+            find[0].CountryId = model.CountryId;
+
+            await data.SaveChangesAsync();
         }
     }
 }

@@ -53,6 +53,24 @@ namespace OnlineCarMarket.Controllers
         {
             return View(await engineService.GetAllEngines());
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            List<EditEngineModel> model =  await engineService.GetTheEngineToEdit(id);
+            model[0].Manifacturers = await carService.GetManifacturers();
+            model[0].Types = await engineService.GetEngineType();
+            return View(model[0]);
+            
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditEngineModel model)
+        {
+            await engineService.SaveChangesAsync(model);
+            return RedirectToAction(nameof(AllEngines));
+
+        }
     }
 
 }

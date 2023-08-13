@@ -44,5 +44,20 @@ namespace OnlineCarMarket.Controllers
             return View(await manifacturerService.GetAllBrands());
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int Id)
+        {
+            List<EditManufacturerViewModel> toEdit = await manifacturerService.FindBrandToBeEdited(Id);
+            toEdit[0].Countries = await manifacturerService.GetAllCountries();
+            return View(toEdit[0]);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditManufacturerViewModel model)
+        {
+            await manifacturerService.SaveChanges(model);
+            return RedirectToAction(nameof(AllBrands));
+        }
+
     }
 }

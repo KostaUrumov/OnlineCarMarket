@@ -9,5 +9,7 @@ namespace OnlineCarMarket_Core.Interfaces
         Task<IEnumerable<Manifacturer>> GetAllmanifacturers();
         Task<IEnumerable<EngineType>> GetEngineType();
         Task<List<ShowEngineModelView>> GetAllEngines();
+        Task<List<EditEngineModel>> GetTheEngineToEdit(int id);
+        Task SaveChangesAsync(EditEngineModel model);
     }
 }

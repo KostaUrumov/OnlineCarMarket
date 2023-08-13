@@ -9,5 +9,8 @@ namespace OnlineCarMarket_Core.Interfaces
         Task AddBrandAsync(NewManufacturerViewModel model);
 
         Task<List<ShowManufacturerViewModel>> GetAllBrands();
+
+        Task<List<EditManufacturerViewModel>> FindBrandToBeEdited(int Id);
+        Task SaveChanges(EditManufacturerViewModel model);
     }
 }

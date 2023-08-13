@@ -16,11 +16,15 @@
     {
         <div class="card col-4" style="width: 20rem;">
             <div class="card-body, bg-warning text-black">
-                <p class="mb-0">Model: @car.Manufacturer</p>
-                <p class="mb-0">Model: @car.FuelType</p>
-                <p class="mb-0">Model: @car.HorsePower</p>
-                <p class="mb-0">Model: @car.Volume</p>
-                <p class="mb-0">Model: @car.Consumption</p>
+                <p class="mb-0">Manufacturer: @car.Manufacturer</p>
+                <p class="mb-0">Fuel: @car.FuelType</p>
+                <p class="mb-0">Horse Power: @car.HorsePower</p>
+                <p class="mb-0">Cubic Capacity: @car.Volume</p>
+                <p class="mb-0">Fuel Consumption: @car.Consumption</p>
+            </div>
+            <p></p>
+            <div class="text-center">
+                <a asp-controller="Engine" asp-action="Edit" asp-route-id="@car.Id" class="btn btn-success">Edit</a>
             </div>
         </div>
     }

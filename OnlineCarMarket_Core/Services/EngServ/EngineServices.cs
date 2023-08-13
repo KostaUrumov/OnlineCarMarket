@@ -58,5 +58,37 @@ namespace OnlineCarMarket_Core.Services.EngServ
         {
             return await data.EngineTypes.ToListAsync();
         }
+
+        public async Task<List<EditEngineModel>> GetTheEngineToEdit(int id)
+        {
+            List<EditEngineModel> correctEngine = await data
+                .Engines
+                .Where(e => e.Id == id)
+                .Select(e=> new EditEngineModel()
+                {
+                    Id = e.Id,
+                    Power = e.HorsePower,
+                    Volume= e.Volume,
+                    Consumption= e.FuelConsumption
+                    
+                }) 
+                .ToListAsync();
+
+            return correctEngine;
+                
+        }
+
+        public async Task SaveChangesAsync(EditEngineModel model)
+        {
+            var editIt = await data.Engines.FirstAsync(x => x.Id == model.Id);
+            editIt.EngineTypeId = model.TypeId;
+            editIt.ManifacturerId = model.ManifacturerId;
+            editIt.HorsePower = model.Power;
+            editIt.Volume = model.Volume;
+            editIt.FuelConsumption = model.Consumption;
+
+            await data.SaveChangesAsync();
+            
+        }
     }
 }
