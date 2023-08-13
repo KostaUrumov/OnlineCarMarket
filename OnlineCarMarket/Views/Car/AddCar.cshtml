@@ -10,7 +10,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="mb-3">
-                <label asp-for="@Model.ManifacturerId" class="form-label">Manifacturer</label>
+                <label asp-for="@Model.ManifacturerId" class="form-label">Manufacturer</label>
                 <select asp-for="@Model.ManifacturerId" class="form-control">
                     @foreach (var manifacturer in Model.Manifacturers)
                     {
