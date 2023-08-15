@@ -106,7 +106,7 @@ namespace OnlineCarMarket_Core.Services.EngServ
                     Consumption = e.FuelConsumption
 
                 })
-                .OrderBy(x => x.Manufacturer)
+                .OrderBy(x => x.Volume)
                 .ToListAsync();
             return engines;
 
