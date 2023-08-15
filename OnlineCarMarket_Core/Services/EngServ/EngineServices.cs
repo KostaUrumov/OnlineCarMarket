@@ -90,5 +90,26 @@ namespace OnlineCarMarket_Core.Services.EngServ
             await data.SaveChangesAsync();
             
         }
+
+        public async Task<List<ShowEngineModelView>> searchEngineByManifacture(SearchEngineByManifactureModel model)
+        {
+            List<ShowEngineModelView> engines = await data
+                .Engines
+                .Where(x=>x.ManifacturerId == model.ManifacturerId)
+                .Select(e => new ShowEngineModelView
+                {
+                    Id = e.Id,
+                    Manufacturer = e.Manifacturer.Name,
+                    FuelType = e.Type.Fuel,
+                    HorsePower = e.HorsePower,
+                    Volume = e.Volume,
+                    Consumption = e.FuelConsumption
+
+                })
+                .OrderBy(x => x.Manufacturer)
+                .ToListAsync();
+            return engines;
+
+        }
     }
 }

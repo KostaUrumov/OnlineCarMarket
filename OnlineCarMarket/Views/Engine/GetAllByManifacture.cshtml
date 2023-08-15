@@ -1,0 +1,41 @@
+﻿@model SearchEngineByManifactureModel
+
+@{
+    ViewData["Title"] = "Search for car/s by Brand";
+}
+
+
+<div class="text-center">
+    <h3>Search for car/s by Brand</h3>
+</div>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" asp-route-returnUrl="" method="post">
+            <h3>Search your car.</h3>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <p></p>
+                <p></p>
+                <label asp-for="@Model.ManifacturerId" class="form-label">Select Brand</label>
+                <select asp-for="@Model.ManifacturerId" class="form-control">
+                    @foreach (var manifacturer in Model.Manifacturers)
+                    {
+                        <option value="@manifacturer.Id">@manifacturer.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="ManifacturerId" class="text-danger"></span>
+            </div>
+
+
+            <p> </p>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Search</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

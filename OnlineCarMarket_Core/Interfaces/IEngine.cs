@@ -11,5 +11,7 @@ namespace OnlineCarMarket_Core.Interfaces
         Task<List<ShowEngineModelView>> GetAllEngines();
         Task<List<EditEngineModel>> GetTheEngineToEdit(int id);
         Task SaveChangesAsync(EditEngineModel model);
+
+        Task<List<ShowEngineModelView>> searchEngineByManifacture(SearchEngineByManifactureModel model);
     }
 }

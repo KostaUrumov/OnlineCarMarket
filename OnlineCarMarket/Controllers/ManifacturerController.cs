@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineCarMarket_Core.Interfaces;
+using OnlineCarMarket_Core.Models.Car;
 using OnlineCarMarket_Core.Models.Manufactur;
+using OnlineCarMarket_Core.Services.CarServ;
 
 namespace OnlineCarMarket.Controllers
 {
@@ -9,10 +11,14 @@ namespace OnlineCarMarket.Controllers
     public class ManifacturerController : Controller
     {
         private readonly IManifacturer manifacturerService;
+        private readonly ICarService carServices;
 
-        public ManifacturerController(IManifacturer _manifacturerService)
+        public ManifacturerController(
+            IManifacturer _manifacturerService,
+            ICarService _carService)
         {
             manifacturerService = _manifacturerService;
+            carServices = _carService;
         }
 
         [HttpGet]
@@ -62,6 +68,8 @@ namespace OnlineCarMarket.Controllers
             
             return RedirectToAction(nameof(AllBrands));
         }
+
+        
 
     }
 }
