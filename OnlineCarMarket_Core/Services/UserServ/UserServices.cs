@@ -70,13 +70,16 @@ namespace OnlineCarMarket_Core.Services.UserServ
             await signInManager.SignInAsync(user, isPersistent: false);
         }
 
-        public async Task LogInAsync(LogInUserViewModel model)
+        public async Task<bool> LogInAsync(LogInUserViewModel model)
         {
             var findUser = data.Users.FirstOrDefault(x => x.UserName == model.Username);
             if (findUser != null && findUser.PasswordHash == model.Password)
             {
                 await signInManager.SignInAsync(findUser, isPersistent:false);
+                return true;
             }
+
+            return false;
 
 
         }
@@ -92,7 +95,5 @@ namespace OnlineCarMarket_Core.Services.UserServ
             return true;
 
         }
-
-
     }
 }

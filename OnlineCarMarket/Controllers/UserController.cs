@@ -54,10 +54,16 @@ namespace OnlineCarMarket.Controllers
         {
             if (ModelState.IsValid)
             {
-                await userServices.LogInAsync(model);
+                var logged = await userServices.LogInAsync(model);
+                if (logged is true)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                return RedirectToAction("Login", "User");
+
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "User");
 
         }
 

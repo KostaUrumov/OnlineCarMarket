@@ -8,7 +8,7 @@ namespace OnlineCarMarket_Core.Interfaces
 
         bool UserExists(string username);
 
-        Task LogInAsync(LogInUserViewModel model);
+        Task<bool> LogInAsync(LogInUserViewModel model);
 
         Task AddToRole(RegisterUserViewModel model);
 
