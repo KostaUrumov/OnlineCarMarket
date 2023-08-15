@@ -20,12 +20,15 @@ namespace OnlineCarMarket_Infastructure.Entities
         public EngineType Type { get; set; } = null!;
 
         [Required]
+        [Range(DataConstraints.Engine.MinHorsePower, DataConstraints.Engine.MaxHorsePower)]
         public int HorsePower { get; set; }
 
         [Required]
+        [Range(DataConstraints.Engine.MinVolume, DataConstraints.Engine.MaxVolume)]
         public int Volume { get; set; }
 
         [Required]
+        [Range(DataConstraints.Engine.MinConsumption, DataConstraints.Engine.MaxConsumption)]
         public double FuelConsumption { get; set; }
 
     }

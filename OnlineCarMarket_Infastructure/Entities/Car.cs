@@ -14,9 +14,11 @@ namespace OnlineCarMarket_Infastructure.Entities
         public Manifacturer Manifacturer { get; set; } = null!;
 
         [Required]
+        [MaxLength(DataConstraints.Car.MaxModelNameLength)]
         public string Model { get; set; } = null!;
 
         [Required]
+        [Range(DataConstraints.Car.MinMilage, DataConstraints.Car.MaxMilage)]
         public int Milage { get; set; }
 
         [Required]
@@ -37,6 +39,9 @@ namespace OnlineCarMarket_Infastructure.Entities
         public int NumberOfDoors { get; set; }
 
         [Required]
+        [Range(DataConstraints.Car.MinPrice, DataConstraints.Car.MaxPrice)]
         public decimal Price { get; set; }
+
+
     }
 }

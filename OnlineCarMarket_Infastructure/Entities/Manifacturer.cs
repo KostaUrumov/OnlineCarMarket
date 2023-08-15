@@ -6,7 +6,9 @@ namespace OnlineCarMarket_Infastructure.Entities
     public class Manifacturer
     {
         public int Id { get; set; }
+
         [Required]
+        [MaxLength(DataConstraints.Manufacturer.MaxManufacturerNameLength)]
         public string Name { get; set; } = null!;
 
         [Required]

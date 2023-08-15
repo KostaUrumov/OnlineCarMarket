@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
+using OnlineCarMarket_Infastructure;
 using OnlineCarMarket_Infastructure.Entities;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Http.Headers;
 
 namespace OnlineCarMarket_Core.Models.Car
 {
@@ -11,6 +13,7 @@ namespace OnlineCarMarket_Core.Models.Car
 
         [Required]
         [Display(Name = "Kilometers stand")]
+        [Range(DataConstraints.Car.MinMilage, DataConstraints.Car.MaxMilage)]
         public int Milage { get; set; }
 
         [Required]
@@ -31,6 +34,8 @@ namespace OnlineCarMarket_Core.Models.Car
 
         public int NumberOfDoors { get; set; }
 
+        [Range(DataConstraints.Car.MinPrice, DataConstraints.Car.MaxPrice)]
+        
         public decimal Price { get; set; }
 
 
