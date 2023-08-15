@@ -21,11 +21,6 @@ namespace OnlineCarMarket.Controllers
             carService = _carService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         [HttpGet]
         public async Task<IActionResult> AddNewEngine()
         {
@@ -46,7 +41,7 @@ namespace OnlineCarMarket.Controllers
                await engineService.AddEngineAsync(model);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(AllEngines));
         }
 
         public async Task<IActionResult> AllEngines()
@@ -67,7 +62,11 @@ namespace OnlineCarMarket.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditEngineModel model)
         {
-            await engineService.SaveChangesAsync(model);
+            if (ModelState.IsValid)
+            {
+                await engineService.SaveChangesAsync(model);
+            }
+            
             return RedirectToAction(nameof(AllEngines));
 
         }

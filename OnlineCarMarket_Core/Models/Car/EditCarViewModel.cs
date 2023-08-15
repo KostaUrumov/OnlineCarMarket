@@ -1,4 +1,5 @@
-﻿using OnlineCarMarket_Infastructure.Entities;
+﻿using OnlineCarMarket_Infastructure;
+using OnlineCarMarket_Infastructure.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineCarMarket_Core.Models.Car
@@ -12,10 +13,10 @@ namespace OnlineCarMarket_Core.Models.Car
 
         [Required]
         [Display(Name = "Kilometers stand")]
+        [Range(DataConstraints.Car.MinMilage, DataConstraints.Car.MaxMilage)]
         public int Milage { get; set; }
 
         [Required]
-
         public int ManifacturerId { get; set; }
         public IEnumerable<Manifacturer> Manifacturers { get; set; } = new List<Manifacturer>();
 
@@ -30,8 +31,11 @@ namespace OnlineCarMarket_Core.Models.Car
         [Required]
         public DateTime FirstRegistration { get; set; }
 
+        [Range(DataConstraints.Car.MinNumberDoors, DataConstraints.Car.MaximumNumberDoors)]
         public int NumberOfDoors { get; set; }
 
+        [Required]
+        [Range(DataConstraints.Car.MinPrice, DataConstraints.Car.MaxPrice)]
         public decimal Price { get; set; }
 
 

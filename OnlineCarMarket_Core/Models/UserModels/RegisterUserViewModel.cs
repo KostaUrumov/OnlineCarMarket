@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OnlineCarMarket_Infastructure;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineCarMarket_Core.Models.UserModels
 {
@@ -6,10 +7,14 @@ namespace OnlineCarMarket_Core.Models.UserModels
     {
         [Required]
         [Display(Name = "First Name")]
+        [MinLength(DataConstraints.User.MinNameLength)]
+        [MaxLength(DataConstraints.User.MaxNameLength)]
         public string FirstName { get; set; } = null!;
 
         [Required]
         [Display(Name = "Last Name")]
+        [MinLength(DataConstraints.User.MinNameLength)]
+        [MaxLength(DataConstraints.User.MaxNameLength)]
         public string LastName { get; set; } = null!;
 
         [Required]

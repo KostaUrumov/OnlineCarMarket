@@ -41,11 +41,14 @@ namespace OnlineCarMarket.Controllers
         [Authorize]
         public async Task<IActionResult> AddCar(RegisterCarViewModel model)
         {
-            var userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if (userId != null)
+            if (ModelState.IsValid)
             {
-                var car = await carServices.AddCarAsync(model);
-                await carServices.AddToMyListAsync(car, userId);
+                var userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+                if (userId != null)
+                {
+                    var car = await carServices.AddCarAsync(model);
+                    await carServices.AddToMyListAsync(car, userId);
+                }
             }
 
             return RedirectToAction(nameof(MyCars));
@@ -163,7 +166,10 @@ namespace OnlineCarMarket.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditCarViewModel model)
         {
-            await carServices.SaveChangesAsync(model);
+            if (ModelState.IsValid)
+            {
+                await carServices.SaveChangesAsync(model);
+            }
 
             return RedirectToAction(nameof(MyCars));
         }

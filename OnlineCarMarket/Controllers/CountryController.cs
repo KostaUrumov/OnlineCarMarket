@@ -16,11 +16,6 @@ namespace OnlineCarMarket.Controllers
             countryService = _countryService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         [HttpGet]
         public IActionResult AddCountry()
         {
@@ -47,7 +42,11 @@ namespace OnlineCarMarket.Controllers
         [HttpPost]
         public async Task<IActionResult> EditTheGivenCountry(EditCountryViewModel model)
         {
-            await countryService.SaveNewCountry(model);
+            if (ModelState.IsValid)
+            {
+                await countryService.SaveNewCountry(model);
+            }
+            
             return RedirectToAction(nameof(AllCountries));
 
         }
@@ -67,9 +66,6 @@ namespace OnlineCarMarket.Controllers
             await countryService.SaveNewCountry(model);
             return RedirectToAction(nameof(AllCountries));
         }
-
-
-
 
     }
 }

@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineCarMarket_Core.Models.Body;
 using OnlineCarMarket_Core.Interfaces;
-using System.Runtime.CompilerServices;
 
 namespace OnlineCarMarket.Controllers
 {
@@ -14,11 +13,6 @@ namespace OnlineCarMarket.Controllers
         public BodyTypeController(IBody _bodyService)
         {
             bodyService = _bodyService;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
         }
 
         [HttpGet]
@@ -35,7 +29,7 @@ namespace OnlineCarMarket.Controllers
             {
                 await bodyService.AddBodyAsync(model);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(AllBodyTypes));
         }
 
         public async Task<IActionResult> AllBodyTypes()

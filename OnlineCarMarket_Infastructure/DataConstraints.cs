@@ -1,4 +1,6 @@
-﻿namespace OnlineCarMarket_Infastructure
+﻿using Microsoft.Data.SqlClient.DataClassification;
+
+namespace OnlineCarMarket_Infastructure
 {
     public class DataConstraints
     {
@@ -12,6 +14,9 @@
 
             public const double MinPrice = 0.0;
             public const double MaxPrice = double.MaxValue;
+
+            public const int MinNumberDoors = 1;
+            public const int MaximumNumberDoors = 2;
         }
 
         public class Country
@@ -49,6 +54,7 @@
         {
             public const int MinNameLength = 2;
             public const int MaxNameLength = 50;
+            
         }
 
     }

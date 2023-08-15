@@ -8,7 +8,7 @@
     <h3>All Cars</h3>
 </div>
 
-<div>
+<div class="text-center row">
     
     @foreach (var car in Model)
     {
@@ -20,6 +20,7 @@
                 <p class="mb-0">Engine volume: @car.EngineVolume</p>
                 <p class="mb-0">Engine power: @car.EnginePower</p>
                 <p class="mb-0">Price: @car.Price</p>
+            </div>
                 @if (car.isObserved == false)
                 {
                 <p class="text-center">
@@ -28,8 +29,6 @@
                     </form>
                 </p>
                 }
-
-            </div>
         </div>
     }
 </div>

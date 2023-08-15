@@ -35,7 +35,7 @@ namespace OnlineCarMarket.Controllers
                 await manifacturerService.AddBrandAsync(model);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(AllBrands));
         }
 
 
@@ -55,7 +55,11 @@ namespace OnlineCarMarket.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditManufacturerViewModel model)
         {
-            await manifacturerService.SaveChanges(model);
+            if (ModelState.IsValid)
+            {
+                await manifacturerService.SaveChanges(model);
+            }
+            
             return RedirectToAction(nameof(AllBrands));
         }
 

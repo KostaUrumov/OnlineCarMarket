@@ -1,4 +1,5 @@
-﻿using OnlineCarMarket_Infastructure.Entities;
+﻿using OnlineCarMarket_Infastructure;
+using OnlineCarMarket_Infastructure.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineCarMarket_Core.Models.Engines
@@ -17,12 +18,15 @@ namespace OnlineCarMarket_Core.Models.Engines
         public IEnumerable<EngineType> Types { get; set; } = new List<EngineType>();
 
         [Required]
+        [Range(DataConstraints.Engine.MinHorsePower, DataConstraints.Engine.MaxHorsePower)]
         public int Power { get; set; }
 
         [Required]
+        [Range(DataConstraints.Engine.MinVolume, DataConstraints.Engine.MaxVolume)]
         public int Volume { get; set; }
 
         [Required]
+        [Range(DataConstraints.Engine.MinConsumption, DataConstraints.Engine.MaxConsumption)]
         public double Consumption { get; set; }
 
     }

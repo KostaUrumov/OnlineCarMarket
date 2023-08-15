@@ -36,6 +36,7 @@ namespace OnlineCarMarket_Infastructure.Entities
         [Required]
         public DateTime FirstRegistration { get; set; }
 
+        [Range(DataConstraints.Car.MinNumberDoors, DataConstraints.Car.MaximumNumberDoors)]
         public int NumberOfDoors { get; set; }
 
         [Required]

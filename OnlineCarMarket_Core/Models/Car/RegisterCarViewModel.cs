@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity.UI.Services;
-using OnlineCarMarket_Infastructure;
+﻿using OnlineCarMarket_Infastructure;
 using OnlineCarMarket_Infastructure.Entities;
 using System.ComponentModel.DataAnnotations;
-using System.Net.Http.Headers;
 
 namespace OnlineCarMarket_Core.Models.Car
 {
@@ -32,10 +30,11 @@ namespace OnlineCarMarket_Core.Models.Car
         [Required]
         public DateTime FirstRegistration { get; set; }
 
+        [Range(DataConstraints.Car.MinNumberDoors, DataConstraints.Car.MaximumNumberDoors)]
         public int NumberOfDoors { get; set; }
 
+        [Required]
         [Range(DataConstraints.Car.MinPrice, DataConstraints.Car.MaxPrice)]
-        
         public decimal Price { get; set; }
 
 

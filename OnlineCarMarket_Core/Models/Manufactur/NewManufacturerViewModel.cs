@@ -1,4 +1,5 @@
-﻿using OnlineCarMarket_Infastructure.Entities;
+﻿using OnlineCarMarket_Infastructure;
+using OnlineCarMarket_Infastructure.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineCarMarket_Core.Models.Manufactur
@@ -6,6 +7,7 @@ namespace OnlineCarMarket_Core.Models.Manufactur
     public class NewManufacturerViewModel
     {
         [Required]
+        [MaxLength(DataConstraints.Manufacturer.MaxManufacturerNameLength)]
         public string Name { get; set; } = null!;
 
         [Required]
