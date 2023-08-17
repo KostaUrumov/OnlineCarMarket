@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OnlineCarMarket_Core.Interfaces;
-using OnlineCarMarket_Core.Models.Manufactur;
+using OnlineCarMarket.Areas.Administrator.Intefraces;
+using OnlineCarMarket.Areas.Administrator.Models.Manufactur;
 using OnlineCarMarket_Infastructure.Data;
 using OnlineCarMarket_Infastructure.Entities;
-
-namespace OnlineCarMarket_Core.Services.ManServ
+namespace OnlineCarMarket.Areas.Administrator.Services.ManServ
 {
     public class ManifacturerServices : IManifacturer
     {

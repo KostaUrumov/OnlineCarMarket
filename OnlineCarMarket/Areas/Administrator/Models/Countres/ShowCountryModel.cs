@@ -1,4 +1,4 @@
-﻿namespace OnlineCarMarket_Core.Models.Countres
+﻿namespace OnlineCarMarket.Areas.Administrator.Models.Countres
 {
     public class ShowCountryModel
     {

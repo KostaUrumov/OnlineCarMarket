@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OnlineCarMarket_Core.Models.Body;
-using OnlineCarMarket_Core.Interfaces;
+using OnlineCarMarket.Areas.Administrator.Models.Body;
+using OnlineCarMarket.Areas.Administrator.Interfaces;
 
-namespace OnlineCarMarket.Controllers
+namespace OnlineCarMarket.Areas.Administrator.Controllers
 {
     [Authorize(Policy = "AdminsOnly")]
-    public class BodyTypeController : Controller
+    public class BodyTypeController : BaseController
     {
         private readonly IBody bodyService;
 
@@ -34,7 +34,7 @@ namespace OnlineCarMarket.Controllers
 
         public async Task<IActionResult> AllBodyTypes()
         {
-            return View (await bodyService.GetAllBodyTypes());
+            return View(await bodyService.GetAllBodyTypes());
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using OnlineCarMarket_Core.Models.Manufactur;
+﻿using OnlineCarMarket.Areas.Administrator.Models.Manufactur;
 using OnlineCarMarket_Infastructure.Entities;
 
-namespace OnlineCarMarket_Core.Interfaces
+namespace OnlineCarMarket.Areas.Administrator.Intefraces
 {
     public interface IManifacturer
     {

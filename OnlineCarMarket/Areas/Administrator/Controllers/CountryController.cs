@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OnlineCarMarket_Core.Interfaces;
-using OnlineCarMarket_Core.Models.Countres;
-using OnlineCarMarket_Infastructure.Entities;
+using OnlineCarMarket.Areas.Administrator.Interfaces;
+using OnlineCarMarket.Areas.Administrator.Models.Countres;
 
-namespace OnlineCarMarket.Controllers
+namespace OnlineCarMarket.Areas.Administrator.Controllers
 {
     [Authorize(Policy = "AdminsOnly")]
-    public class CountryController : Controller
+    public class CountryController : BaseController
     {
         private readonly ICountry countryService;
 
@@ -46,7 +45,7 @@ namespace OnlineCarMarket.Controllers
             {
                 await countryService.SaveNewCountry(model);
             }
-            
+
             return RedirectToAction(nameof(AllCountries));
 
         }
@@ -62,7 +61,7 @@ namespace OnlineCarMarket.Controllers
 
         public async Task<IActionResult> SaveNewCountry(EditCountryViewModel model, string oldname)
         {
-            
+
             await countryService.SaveNewCountry(model);
             return RedirectToAction(nameof(AllCountries));
         }

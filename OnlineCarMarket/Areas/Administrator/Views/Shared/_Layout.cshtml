@@ -26,34 +26,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Home" asp-action="Index">Admin Home</a>
                         </li>
-                        
-                    }
-
-                    @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("User"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="AddCar">Add new car</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="FilterCar">Search</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="AllCars">All other`s cars</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="MyCars">My cars</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="MyObservCars">Observing Cars</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="GetAllByManifacture">Search By Brand</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="GetAllByFuelType">Search by Fuel</a>
-                        </li>
-
                     }
 
                 </ul>

@@ -2,10 +2,12 @@
 using OnlineCarMarket_Infastructure.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace OnlineCarMarket_Core.Models.Manufactur
+namespace OnlineCarMarket.Areas.Administrator.Models.Manufactur
 {
-    public class NewManufacturerViewModel
+    public class EditManufacturerViewModel
     {
+        public int Id { get; set; }
+
         [Required]
         [MaxLength(DataConstraints.Manufacturer.MaxManufacturerNameLength)]
         public string Name { get; set; } = null!;
@@ -14,5 +16,6 @@ namespace OnlineCarMarket_Core.Models.Manufactur
         public int CountryId { get; set; }
 
         public IEnumerable<Country> Countries { get; set; } = new List<Country>();
+
     }
 }

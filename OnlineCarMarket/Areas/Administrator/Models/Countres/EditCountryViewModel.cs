@@ -1,9 +1,9 @@
 ﻿using OnlineCarMarket_Infastructure;
 using System.ComponentModel.DataAnnotations;
 
-namespace OnlineCarMarket_Core.Models.Countres
+namespace OnlineCarMarket.Areas.Administrator.Models.Countres
 {
-    public class AddCountryViewModel
+    public class EditCountryViewModel
     {
         public int Id { get; set; }
 

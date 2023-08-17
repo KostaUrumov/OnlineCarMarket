@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnlineCarMarket_Core.Models.Body
+namespace OnlineCarMarket.Areas.Administrator.Models.Body
 {
     public class AddBodyTypeViewModel
     {

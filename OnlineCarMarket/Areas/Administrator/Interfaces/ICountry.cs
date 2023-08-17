@@ -1,6 +1,6 @@
-﻿using OnlineCarMarket_Core.Models.Countres;
+﻿using OnlineCarMarket.Areas.Administrator.Models.Countres;
 
-namespace OnlineCarMarket_Core.Interfaces
+namespace OnlineCarMarket.Areas.Administrator.Interfaces
 {
     public interface ICountry
     {

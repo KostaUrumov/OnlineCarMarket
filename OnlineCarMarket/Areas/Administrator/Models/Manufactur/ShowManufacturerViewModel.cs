@@ -1,4 +1,4 @@
-﻿namespace OnlineCarMarket_Core.Models.Manufactur
+﻿namespace OnlineCarMarket.Areas.Administrator.Models.Manufactur
 {
     public class ShowManufacturerViewModel
     {

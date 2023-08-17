@@ -1,6 +1,6 @@
-﻿using OnlineCarMarket_Core.Models.Body;
+﻿using OnlineCarMarket.Areas.Administrator.Models.Body;
 
-namespace OnlineCarMarket_Core.Interfaces
+namespace OnlineCarMarket.Areas.Administrator.Interfaces
 {
     public interface IBody
     {

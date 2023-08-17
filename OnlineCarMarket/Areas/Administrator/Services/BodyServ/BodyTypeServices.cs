@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OnlineCarMarket_Core.Interfaces;
-using OnlineCarMarket_Core.Models.Body;
+using OnlineCarMarket.Areas.Administrator.Interfaces;
+using OnlineCarMarket.Areas.Administrator.Models.Body;
 using OnlineCarMarket_Infastructure.Data;
 using OnlineCarMarket_Infastructure.Entities;
 
-namespace OnlineCarMarket_Core.Services.BodyServ
+namespace OnlineCarMarket.Areas.Administrator.Services.EngServBodyServ
 {
     public class BodyTypeServices : IBody
     {

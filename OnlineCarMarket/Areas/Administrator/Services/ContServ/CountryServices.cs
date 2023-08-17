@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OnlineCarMarket_Core.Interfaces;
-using OnlineCarMarket_Core.Models.Countres;
+using OnlineCarMarket.Areas.Administrator.Interfaces;
+using OnlineCarMarket.Areas.Administrator.Models.Countres;
 using OnlineCarMarket_Infastructure.Data;
 using OnlineCarMarket_Infastructure.Entities;
 
-namespace OnlineCarMarket_Core.Services.ContServ
+namespace OnlineCarMarket.Areas.Administrator.Services.ContServ
 {
     public class CountryServices : ICountry
     {
