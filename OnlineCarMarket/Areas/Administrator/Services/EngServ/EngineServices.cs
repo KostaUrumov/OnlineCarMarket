@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OnlineCarMarket_Core.Interfaces;
-using OnlineCarMarket_Core.Models.Engines;
+using OnlineCarMarket.Areas.Administrator.Intefraces;
+using OnlineCarMarket.Areas.Administrator.Models.Engine;
 using OnlineCarMarket_Infastructure.Data;
 using OnlineCarMarket_Infastructure.Entities;
 
-namespace OnlineCarMarket_Core.Services.EngServ
+namespace OnlineCarMarket.Areas.Administrator.Services.EngServ
 {
     public class EngineServices : IEngine
     {

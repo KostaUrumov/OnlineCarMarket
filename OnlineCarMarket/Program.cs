@@ -5,10 +5,11 @@ using OnlineCarMarket_Core.Interfaces;
 using OnlineCarMarket_Core.Services.CarServ;
 using OnlineCarMarket_Core.Services.UserServ;
 using Microsoft.AspNetCore.Identity;
-using OnlineCarMarket_Core.Services.EngServ;
 using OnlineCarMarket_Core.Services.ContServ;
 using OnlineCarMarket_Core.Services.BodyServ;
 using OnlineCarMarket_Core.Services.ManServ;
+using OnlineCarMarket.Areas.Administrator.Intefraces;
+using OnlineCarMarket.Areas.Administrator.Services.EngServ;
 
 var builder = WebApplication.CreateBuilder(args);
 

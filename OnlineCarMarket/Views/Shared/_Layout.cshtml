@@ -22,22 +22,12 @@
 
                     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin"))
                     {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Engine" asp-action="AllEngines">Engines</a>
-                        </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Country" asp-action="AllCountries">Countries</a>
+                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Home" asp-action="Index">Admin Home</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="BodyType" asp-action="AllBodyTypes">BodyType</a>
-                        </li>
-
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Manifacturer" asp-action="AllBrands">Brands</a>
-                        </li>
+                        
 
                     }
 
@@ -71,7 +61,7 @@
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
-            </div>
+            
         </nav>
     </header>
     <div class="container">

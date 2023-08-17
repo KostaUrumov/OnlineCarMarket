@@ -1,4 +1,4 @@
-﻿namespace OnlineCarMarket_Core.Models.Engines
+﻿namespace OnlineCarMarket.Areas.Administrator.Models.Engine
 {
     public class ShowEngineModelView
     {

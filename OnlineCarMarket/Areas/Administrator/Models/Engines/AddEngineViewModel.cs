@@ -2,7 +2,7 @@
 using OnlineCarMarket_Infastructure.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace OnlineCarMarket_Core.Models.Engines
+namespace OnlineCarMarket.Areas.Administrator.Models.Engine
 {
     public class AddEngineViewModel
     {

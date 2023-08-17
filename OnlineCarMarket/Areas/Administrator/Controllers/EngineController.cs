@@ -1,16 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using OnlineCarMarket.Areas.Administrator.Intefraces;
+using OnlineCarMarket.Areas.Administrator.Models.Engine;
 using OnlineCarMarket_Core.Interfaces;
-using OnlineCarMarket_Core.Models.Car;
-using OnlineCarMarket_Core.Models.Engines;
-using OnlineCarMarket_Core.Services.CarServ;
 
-namespace OnlineCarMarket.Controllers
+namespace OnlineCarMarket.Areas.Administrator.Controllers
 {
-    
+
     [Authorize(Policy = "AdminsOnly")]
-    public class EngineController : Controller
+    public class EngineController : BaseController
     {
 
         private readonly IEngine engineService;
@@ -41,7 +39,7 @@ namespace OnlineCarMarket.Controllers
         {
             if (ModelState.IsValid)
             {
-               await engineService.AddEngineAsync(model);
+                await engineService.AddEngineAsync(model);
             }
 
             return RedirectToAction(nameof(AllEngines));
@@ -55,11 +53,11 @@ namespace OnlineCarMarket.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            List<EditEngineModel> model =  await engineService.GetTheEngineToEdit(id);
+            List<EditEngineModel> model = await engineService.GetTheEngineToEdit(id);
             model[0].Manifacturers = await carServices.GetManifacturers();
             model[0].Types = await engineService.GetEngineType();
             return View(model[0]);
-            
+
         }
 
         [HttpPost]
@@ -69,7 +67,7 @@ namespace OnlineCarMarket.Controllers
             {
                 await engineService.SaveChangesAsync(model);
             }
-            
+
             return RedirectToAction(nameof(AllEngines));
 
         }

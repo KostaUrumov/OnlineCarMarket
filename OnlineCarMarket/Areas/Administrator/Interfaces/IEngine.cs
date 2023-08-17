@@ -1,7 +1,7 @@
-﻿using OnlineCarMarket_Core.Models.Engines;
+﻿using OnlineCarMarket.Areas.Administrator.Models.Engine;
 using OnlineCarMarket_Infastructure.Entities;
 
-namespace OnlineCarMarket_Core.Interfaces
+namespace OnlineCarMarket.Areas.Administrator.Intefraces
 {
     public interface IEngine
     {
