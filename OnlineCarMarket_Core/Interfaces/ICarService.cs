@@ -10,9 +10,10 @@ namespace OnlineCarMarket_Core.Interfaces
         Task<List<DisplayCarModel>> GetMyCars(string userId);
 
         Task<IEnumerable<BodyType>> GetBodyTypes();
-        Task<IEnumerable<Engine>> GetEngines();
+        Task<IEnumerable<Engine>> GetEngines(int id);
 
         Task<IEnumerable<Manifacturer>> GetManifacturers();
+        Task<IEnumerable<Manifacturer>> GetManifacturers(int Id);
 
         Task<IEnumerable<EngineType>> GetFuel();
 

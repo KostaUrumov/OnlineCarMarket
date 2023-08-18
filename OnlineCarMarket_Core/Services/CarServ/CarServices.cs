@@ -127,9 +127,12 @@ namespace OnlineCarMarket_Core.Services.CarServ
             return await data.BoduTypes.ToListAsync();
         }
 
-        public async Task<IEnumerable<Engine>> GetEngines()
+        public async Task<IEnumerable<Engine>> GetEngines(int id)
         {
-            return await data.Engines.ToListAsync();
+
+            return await data.Engines
+                .Where(x=>x.ManifacturerId == id)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<EngineType>> GetFuel()
@@ -141,6 +144,15 @@ namespace OnlineCarMarket_Core.Services.CarServ
         {
             return await data.Manifacturers.OrderBy(x => x.Name).ToListAsync();
         }
+
+        public async Task<IEnumerable<Manifacturer>> GetManifacturers(int Id)
+        {
+            return await data.Manifacturers
+                .Where(x=>x.Id == Id)
+                .OrderBy(x => x.Name)
+                .ToListAsync();
+        }
+
 
         public async Task<List<DisplayCarModel>> GetMyCars(string userId)
         {
@@ -194,6 +206,7 @@ namespace OnlineCarMarket_Core.Services.CarServ
             List<DisplayCarModel> listedCars = data
                 .Cars
                 .OrderByDescending(x => x.Id)
+                .Where(x=> x.ExpireDate > DateTime.UtcNow)
                 .Select(x => new DisplayCarModel()
                 {
                     Model = x.Model,

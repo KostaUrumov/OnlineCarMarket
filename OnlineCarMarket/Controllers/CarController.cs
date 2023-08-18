@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineCarMarket_Core.Interfaces;
 using OnlineCarMarket_Core.Models.Car;
 using OnlineCarMarket_Infastructure.Data;
-using System.Runtime.CompilerServices;
 using System.Security.Claims;
 
 namespace OnlineCarMarket.Controllers
@@ -24,17 +23,39 @@ namespace OnlineCarMarket.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> AddCar()
+        public async Task<IActionResult> SelectBrand()
         {
-            RegisterCarViewModel model = new RegisterCarViewModel()
+            AddCarManufacturerModel model = new AddCarManufacturerModel()
             {
-                BodyTypes = await carServices.GetBodyTypes(),
-                Engine = await carServices.GetEngines(),
-                Manifacturers = await carServices.GetManifacturers(),
-                FirstRegistration = new DateTime(2010, 1, 1)
+                Manifacturers =  await carServices.GetManifacturers()
             };
 
             return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public  IActionResult SelectBrand(AddCarManufacturerModel model)
+        {
+            return RedirectToAction(nameof(AddCar), model);
+        }
+
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> AddCar(AddCarManufacturerModel model)
+        {
+            RegisterCarViewModel register = new RegisterCarViewModel()
+            {
+                BodyTypes = await carServices.GetBodyTypes(),
+                Engine = await carServices.GetEngines(model.ManifacturerId),
+                FirstRegistration = new DateTime(2010, 1, 1),
+                Manifacturers = await carServices.GetManifacturers(model.ManifacturerId)
+                
+            };
+
+
+            return View(register);
         }
 
 
@@ -42,6 +63,7 @@ namespace OnlineCarMarket.Controllers
         [Authorize]
         public async Task<IActionResult> AddCar(RegisterCarViewModel model)
         {
+            
             if (ModelState.IsValid)
             {
                 var userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
@@ -161,7 +183,7 @@ namespace OnlineCarMarket.Controllers
             List<EditCarViewModel> carToEdit = await carServices.FindCar(id);
             carToEdit[0].Manifacturers = await carServices.GetManifacturers();
             carToEdit[0].BodyTypes = await carServices.GetBodyTypes();
-            carToEdit[0].Engine = await carServices.GetEngines();
+            carToEdit[0].Engine = await carServices.GetEngines(carToEdit[0].ManifacturerId);
 
             return View(carToEdit[0]);
         }
