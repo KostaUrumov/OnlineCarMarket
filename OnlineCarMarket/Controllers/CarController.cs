@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineCarMarket_Core.Interfaces;
 using OnlineCarMarket_Core.Models.Car;
 using OnlineCarMarket_Infastructure.Data;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 
 namespace OnlineCarMarket.Controllers
@@ -56,9 +57,11 @@ namespace OnlineCarMarket.Controllers
 
         public async Task<IActionResult> AllCars()
         {
+
             var userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             List<DisplayCarModel> listedCars = await carServices.GetAllCars(userId);
-            return View(await carServices.CheckIfCarAreObservedByUser(userId, listedCars));
+            List<DisplayCarModel> returnCars =  await carServices.CheckIfExpired(listedCars);
+            return View(await carServices.CheckIfCarAreObservedByUser(userId, returnCars));
         }
 
         [HttpGet]
@@ -171,6 +174,12 @@ namespace OnlineCarMarket.Controllers
                 await carServices.SaveChangesAsync(model);
             }
 
+            return RedirectToAction(nameof(MyCars));
+        }
+
+        public async Task<IActionResult> Renew(int id)
+        {
+            await carServices.RenewCarOffer(id);
             return RedirectToAction(nameof(MyCars));
         }
 

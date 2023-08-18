@@ -20,12 +20,11 @@
                <p class="mb-0">Engine volume: @car.EngineVolume</p>
                <p class="mb-0">Engine power: @car.EnginePower</p>
                <p class="mb-0">Price: @car.Price</p>
-            </div>
 
                 <form class="input-group-sm" asp-route-carId="@car.Id" asp-controller="Car" asp-action="RemoveFromObserved" method="post">
                 <input type="submit" value="Remove from my list" class="fs-6 btn btn-success mb-3 p-2" />
                 </form>
-              
+            </div>
          </div>
     }
 </div>

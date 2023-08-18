@@ -16,7 +16,7 @@ namespace OnlineCarMarket_Infastructure
             public const double MaxPrice = double.MaxValue;
 
             public const int MinNumberDoors = 1;
-            public const int MaximumNumberDoors = 2;
+            public const int MaximumNumberDoors = 5;
         }
 
         public class Country

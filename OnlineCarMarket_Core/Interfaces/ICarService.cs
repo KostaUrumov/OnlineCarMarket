@@ -35,5 +35,8 @@ namespace OnlineCarMarket_Core.Interfaces
 
         Task SaveChangesAsync(EditCarViewModel model);
 
+        Task <List<DisplayCarModel>> CheckIfExpired (List<DisplayCarModel> list);
+        Task RenewCarOffer(int id);
+
     }
 }

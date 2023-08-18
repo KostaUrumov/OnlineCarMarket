@@ -9,7 +9,7 @@
         public int EngineVolume { get; set; }
         public int EnginePower { get; set; }
         public string Price { get; set; } = null!;
-
         public bool isObserved { get; set; } = false;
+        public DateTime Expire { get; set; }
     }
 }

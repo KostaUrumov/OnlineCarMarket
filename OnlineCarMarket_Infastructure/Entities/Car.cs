@@ -43,6 +43,9 @@ namespace OnlineCarMarket_Infastructure.Entities
         [Range(DataConstraints.Car.MinPrice, DataConstraints.Car.MaxPrice)]
         public decimal Price { get; set; }
 
+        public DateTime? DateOfRegistration { get; set; }
+
+        public DateTime? ExpireDate { get; set; }
 
     }
 }

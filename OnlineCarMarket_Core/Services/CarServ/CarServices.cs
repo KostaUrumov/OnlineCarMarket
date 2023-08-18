@@ -15,7 +15,7 @@ namespace OnlineCarMarket_Core.Services.CarServ
         }
         public async Task<Car> AddCarAsync(RegisterCarViewModel model)
         {
-            
+
             Car auto = new Car()
             {
                 ManifacturerId = model.ManifacturerId,
@@ -25,8 +25,9 @@ namespace OnlineCarMarket_Core.Services.CarServ
                 EngineId = model.EngineId,
                 FirstRegistration = model.FirstRegistration,
                 NumberOfDoors = model.NumberOfDoors,
-                Price = model.Price
-                
+                Price = model.Price,
+                DateOfRegistration = DateTime.UtcNow,
+                ExpireDate = DateTime.UtcNow.AddMinutes(10)
             };
             data.Cars.Add(auto);
             await data.SaveChangesAsync();
@@ -66,6 +67,21 @@ namespace OnlineCarMarket_Core.Services.CarServ
             
         }
 
+        public async Task<List<DisplayCarModel>> CheckIfExpired(List<DisplayCarModel> list)
+        {
+            List<DisplayCarModel> listedCars = new List<DisplayCarModel>();
+            foreach (var car in list)
+            {
+                if (car.Expire > DateTime.UtcNow)
+                {
+                    listedCars.Add(car);
+                }
+            }
+
+            return listedCars;
+        }
+
+
         public async Task<List<EditCarViewModel>> FindCar(int id)
         {
             List<EditCarViewModel> carToReturn = await data
@@ -99,7 +115,8 @@ namespace OnlineCarMarket_Core.Services.CarServ
                      FirstRegistration = x.Car.FirstRegistration.ToString("dd/MM/yyyy"),
                      EnginePower = x.Car.Engine.HorsePower,
                      EngineVolume = x.Car.Engine.Volume,
-                     Price = x.Car.Price.ToString("#.##")
+                     Price = x.Car.Price.ToString("#.##"),
+                     Expire = (DateTime)x.Car.ExpireDate
                  })
                 .ToListAsync();
             return listedCars;
@@ -138,7 +155,9 @@ namespace OnlineCarMarket_Core.Services.CarServ
                     FirstRegistration = u.Car.FirstRegistration.ToString("dd/MM/yyyy"),
                     EnginePower = u.Car.Engine.HorsePower,
                     EngineVolume = u.Car.Engine.Volume,
-                    Price = u.Car.Price.ToString("#.##")
+                    Price = u.Car.Price.ToString("#.##"),
+                    Expire = (DateTime)u.Car.ExpireDate
+                    
 
                 })
                 .ToListAsync();
@@ -215,6 +234,14 @@ namespace OnlineCarMarket_Core.Services.CarServ
             data.ObservingCars.RemoveRange(toRemove);
             await data.SaveChangesAsync();
            
+        }
+
+        public async Task RenewCarOffer(int id)
+        {
+            Car car = data.Cars.First(x => x.Id == id);
+            car.ExpireDate = DateTime.UtcNow.AddMonths(1);
+
+            await data.SaveChangesAsync();
         }
 
         public async Task SaveChangesAsync(EditCarViewModel model)

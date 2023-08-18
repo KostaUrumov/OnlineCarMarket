@@ -20,11 +20,18 @@
                 <p class="mb-0">Engine volume: @car.EngineVolume</p>
                 <p class="mb-0">Engine power: @car.EnginePower</p>
                 <p class="mb-0">Price: @car.Price</p>
-            </div>
-            <p></p>
+                @if (car.Expire < DateTime.UtcNow)
+                {
+                    <div class="text-center">
+                        <a asp-controller="Car" asp-action="Renew" asp-route-id="@car.Id" class="btn btn-danger">Renew</a>
+                    </div>
+                }
+
+                <p></p>
             <div class="text-center">
                 <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.Id" class="btn btn-danger">Edit</a>
             </div>
+        </div>
         </div>
     }
 </div>
