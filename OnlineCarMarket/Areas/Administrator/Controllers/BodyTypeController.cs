@@ -29,7 +29,7 @@ namespace OnlineCarMarket.Areas.Administrator.Controllers
             {
                 await bodyService.AddBodyAsync(model);
             }
-            return RedirectToAction(nameof(AllBodyTypes));
+            return RedirectToAction("index", "home");
         }
 
         public async Task<IActionResult> AllBodyTypes()

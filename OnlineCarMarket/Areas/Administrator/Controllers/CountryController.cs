@@ -30,7 +30,7 @@ namespace OnlineCarMarket.Areas.Administrator.Controllers
                 await countryService.AddCountryAsync(model);
             }
 
-            return RedirectToAction(nameof(AllCountries));
+            return RedirectToAction("index", "home");
         }
 
         public async Task<IActionResult> AllCountries()
@@ -63,7 +63,7 @@ namespace OnlineCarMarket.Areas.Administrator.Controllers
         {
 
             await countryService.SaveNewCountry(model);
-            return RedirectToAction(nameof(AllCountries));
+            return RedirectToAction("index", "home");
         }
 
     }

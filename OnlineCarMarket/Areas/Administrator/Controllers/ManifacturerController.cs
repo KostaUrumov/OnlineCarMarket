@@ -40,7 +40,7 @@ namespace OnlineCarMarket.Areas.Administrator.Controllers
                 await manifacturerService.AddBrandAsync(model);
             }
 
-            return RedirectToAction(nameof(AllBrands));
+            return RedirectToAction("index", "home");
         }
 
 
@@ -65,7 +65,7 @@ namespace OnlineCarMarket.Areas.Administrator.Controllers
                 await manifacturerService.SaveChanges(model);
             }
 
-            return RedirectToAction(nameof(AllBrands));
+            return RedirectToAction("index", "home");
         }
 
 

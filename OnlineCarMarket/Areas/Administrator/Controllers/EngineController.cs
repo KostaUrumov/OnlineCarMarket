@@ -42,7 +42,7 @@ namespace OnlineCarMarket.Areas.Administrator.Controllers
                 await engineService.AddEngineAsync(model);
             }
 
-            return RedirectToAction(nameof(AllEngines));
+            return RedirectToAction("index", "home");
         }
 
         public async Task<IActionResult> AllEngines()
@@ -68,7 +68,7 @@ namespace OnlineCarMarket.Areas.Administrator.Controllers
                 await engineService.SaveChangesAsync(model);
             }
 
-            return RedirectToAction(nameof(AllEngines));
+            return RedirectToAction("index", "home");
 
         }
 
