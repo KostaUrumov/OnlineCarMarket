@@ -30,6 +30,20 @@ namespace OnlineCarMarket.Areas.Administrator.Services.EngServ
             await data.SaveChangesAsync();
         }
 
+        public bool CheckIfEngineIsIn(AddEngineViewModel model)
+        {
+            var engine = data.Engines.FirstOrDefaultAsync(x=> x.ManifacturerId == model.ManifacturerId
+            && x.EngineTypeId == model.TypeId
+            && x.HorsePower == model.Power
+            && x.Volume == model.Volume);
+            if (engine.Result != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public async Task<List<ShowEngineModelView>> GetAllEngines()
         {
             List<ShowEngineModelView> engines = await data

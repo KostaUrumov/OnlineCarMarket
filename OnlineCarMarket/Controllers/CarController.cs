@@ -12,6 +12,7 @@ namespace OnlineCarMarket.Controllers
     {
         private readonly ApplicationDbContext data;
         private readonly ICarService carServices;
+        
 
         public CarController(
             ApplicationDbContext _data,
@@ -25,6 +26,7 @@ namespace OnlineCarMarket.Controllers
         [Authorize]
         public async Task<IActionResult> SelectBrand()
         {
+            
             AddCarManufacturerModel model = new AddCarManufacturerModel()
             {
                 Manifacturers =  await carServices.GetManifacturers()

@@ -11,7 +11,8 @@ namespace OnlineCarMarket.Areas.Administrator.Intefraces
         Task<List<ShowEngineModelView>> GetAllEngines();
         Task<List<EditEngineModel>> GetTheEngineToEdit(int id);
         Task SaveChangesAsync(EditEngineModel model);
-
         Task<List<ShowEngineModelView>> searchEngineByManifacture(SearchEngineByManifactureModel model);
+        bool CheckIfEngineIsIn(AddEngineViewModel model);
+
     }
 }

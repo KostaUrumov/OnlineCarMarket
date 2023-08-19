@@ -27,7 +27,13 @@ namespace OnlineCarMarket.Areas.Administrator.Controllers
         {
             if (ModelState.IsValid)
             {
-                await countryService.AddCountryAsync(model);
+                var isThere = countryService.CheckIfCountryIsThere(model.Name);
+                if (isThere == false)
+                {
+                    await countryService.AddCountryAsync(model);
+                    return RedirectToAction(nameof(AllCountries));
+                }
+                
             }
 
             return RedirectToAction("index", "home");
@@ -43,7 +49,12 @@ namespace OnlineCarMarket.Areas.Administrator.Controllers
         {
             if (ModelState.IsValid)
             {
-                await countryService.SaveNewCountry(model);
+                var isThere = countryService.CheckIfCountryIsThere(model.Name);
+                if ( isThere == false)
+                {
+                    await countryService.SaveNewCountry(model);
+                    return RedirectToAction(nameof(AllCountries));
+                }
             }
 
             return RedirectToAction(nameof(AllCountries));

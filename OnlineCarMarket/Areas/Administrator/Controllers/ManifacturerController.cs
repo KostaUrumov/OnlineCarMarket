@@ -23,6 +23,7 @@ namespace OnlineCarMarket.Areas.Administrator.Controllers
         [HttpGet]
         public async Task<IActionResult> AddBrand()
         {
+
             NewManufacturerViewModel model = new NewManufacturerViewModel()
             {
                 Countries = await manifacturerService.GetAllCountries()
@@ -37,7 +38,13 @@ namespace OnlineCarMarket.Areas.Administrator.Controllers
         {
             if (ModelState.IsValid)
             {
-                await manifacturerService.AddBrandAsync(model);
+                var isThere = manifacturerService.CheckIfBrandExists(model.Name);
+                if (isThere == false)
+                {
+                    await manifacturerService.AddBrandAsync(model);
+                    return RedirectToAction(nameof(AllBrands));
+                };
+                
             }
 
             return RedirectToAction("index", "home");
@@ -62,7 +69,13 @@ namespace OnlineCarMarket.Areas.Administrator.Controllers
         {
             if (ModelState.IsValid)
             {
-                await manifacturerService.SaveChanges(model);
+                var isThere = manifacturerService.CheckIfBrandExists(model.Name);
+                if (isThere == false)
+                {
+                    await manifacturerService.SaveChanges(model);
+                    return RedirectToAction(nameof(AllBrands));
+                }
+               
             }
 
             return RedirectToAction("index", "home");

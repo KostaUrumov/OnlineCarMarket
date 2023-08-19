@@ -1,45 +1,51 @@
+using Moq;
 using OnlineCarMarket_Core.Interfaces;
-using OnlineCarMarket_Core.Models.Car;
-using OnlineCarMarket_Core.Services.CarServ;
 using OnlineCarMarket_Infastructure.Data;
 using OnlineCarMarket_Infastructure.Entities;
 
 namespace TestForMyApp
 {
-    [TestFixture]
+
     public class Tests
     {
-        private ApplicationDbContext data;
-        private ICarService carService;
-
-        [SetUp]
-        public void Setup()
-        {
-           
-            carService = new CarServices(data);
-        }
-        
-
         [Test]
-        public void AddCarAssync_Test()
+        public void TestAddToMyListAsync()
         {
-            RegisterCarViewModel model = new RegisterCarViewModel()
+            var data = new Mock<ApplicationDbContext>().Object;
+            var carService = new Mock<ICarService>().Object;
+            User bai = new User()
             {
-                ManifacturerId = 1,
-                Type = "Kombi",
-                Milage = 12312,
-                BodyTypeId = 1,
-                EngineId = 1,
-                FirstRegistration = DateTime.Now,
+                UserName = "pesho",
+                Email = "Pesho@mail.bg",
+                FirstName = "Pesho",
+                LastName = "Peshev",
+                PasswordHash = "pesho"
+            };
+            data.Add(bai);
+            data.SaveChanges();
+
+            Car car = new Car()
+            {
+                ManifacturerId = 2,
+                Model = "Pesho",
+                Milage = 11,
+                BodyTypeId = 2,
+                EngineId = 2,
+                FirstRegistration = DateTime.UtcNow,
                 NumberOfDoors = 4,
-                Price = 1400
+                Price = 2,
+                DateOfRegistration = DateTime.UtcNow,
+                ExpireDate = DateTime.UtcNow.AddMinutes(10)
 
             };
+            data.Add(car);
+            data.SaveChanges();
 
-            carService.AddCarAsync(model);
+            carService.AddToMyListAsync(car, bai.Id);
 
-
-            Assert.That(data.Cars.Count(), Is.EqualTo(1)); 
+            Assert.That(data.Cars.Count(), Is.EqualTo(1));
+            Assert.That(data.UsersCars.Count(), Is.EqualTo(1));
+           
         }
     }
 }

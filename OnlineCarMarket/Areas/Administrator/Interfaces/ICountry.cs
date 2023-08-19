@@ -8,5 +8,6 @@ namespace OnlineCarMarket.Areas.Administrator.Interfaces
         Task <List<ShowCountryModel>> GetAllCountries();
         Task<List<EditCountryViewModel>> FindCountry(int countryId);
         Task SaveNewCountry(EditCountryViewModel model);
+        bool CheckIfCountryIsThere(string name);
     }
 }

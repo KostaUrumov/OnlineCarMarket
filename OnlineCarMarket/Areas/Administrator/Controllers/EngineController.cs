@@ -39,7 +39,13 @@ namespace OnlineCarMarket.Areas.Administrator.Controllers
         {
             if (ModelState.IsValid)
             {
-                await engineService.AddEngineAsync(model);
+                var isThere = engineService.CheckIfEngineIsIn(model);
+                if (isThere == false)
+                {
+                    await engineService.AddEngineAsync(model);
+                    return RedirectToAction(nameof(AllEngines));
+                }
+                
             }
 
             return RedirectToAction("index", "home");
@@ -63,9 +69,24 @@ namespace OnlineCarMarket.Areas.Administrator.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditEngineModel model)
         {
+            AddEngineViewModel model2 = new AddEngineViewModel()
+            {
+                Power = model.Power,
+                ManifacturerId = model.ManifacturerId,
+                Consumption = model.Consumption,
+                TypeId = model.TypeId,
+                Volume = model.Volume
+
+            };
             if (ModelState.IsValid)
             {
-                await engineService.SaveChangesAsync(model);
+                var isThere = engineService.CheckIfEngineIsIn(model2);
+                if (isThere == false)
+                {
+                    await engineService.SaveChangesAsync(model);
+                    return RedirectToAction(nameof(AllEngines));
+                }
+                
             }
 
             return RedirectToAction("index", "home");

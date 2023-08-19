@@ -75,5 +75,20 @@ namespace OnlineCarMarket.Areas.Administrator.Services.ManServ
 
             await data.SaveChangesAsync();
         }
+
+        public bool CheckIfBrandExists(string name)
+        {
+            var car = data.Manifacturers.FirstOrDefaultAsync(x => x.Name == name);
+            if (car.Result != null)
+            {
+                return true;
+            }
+
+            return false;
+
+
+            
+
+        }
     }
 }

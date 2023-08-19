@@ -25,6 +25,18 @@ namespace OnlineCarMarket.Areas.Administrator.Services.ContServ
             await data.SaveChangesAsync();
         }
 
+        public bool CheckIfCountryIsThere(string name)
+        {
+            var car = data.Countries.FirstOrDefaultAsync(x => x.Name == name);
+            if (car.Result != null)
+            {
+                return true;
+            }
+
+            return false;
+
+        }
+
         public async Task<List<EditCountryViewModel>> FindCountry(int countryId)
         {
             List<EditCountryViewModel> countryToEdit = await data

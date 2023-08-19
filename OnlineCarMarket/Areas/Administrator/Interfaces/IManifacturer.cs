@@ -12,5 +12,6 @@ namespace OnlineCarMarket.Areas.Administrator.Intefraces
 
         Task<List<EditManufacturerViewModel>> FindBrandToBeEdited(int Id);
         Task SaveChanges(EditManufacturerViewModel model);
+        bool CheckIfBrandExists(string name);
     }
 }

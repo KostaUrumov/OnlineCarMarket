@@ -48,11 +48,6 @@ namespace OnlineCarMarket_Core.Services.UserServ
 
         public async Task AddUserAsync(RegisterUserViewModel model)
         {
-            SHA256 hash = SHA256.Create();
-            var pass = Encoding.Default.GetBytes(model.PassWord);
-            var hashedPass = hash.ComputeHash(pass);
-
-            var finalPass = Convert.ToHexString(hashedPass);
 
             User user = new User()
             {
