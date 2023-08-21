@@ -115,8 +115,7 @@ namespace OnlineCarMarket_Core.Services.CarServ
                      FirstRegistration = x.Car.FirstRegistration.ToString("dd/MM/yyyy"),
                      EnginePower = x.Car.Engine.HorsePower,
                      EngineVolume = x.Car.Engine.Volume,
-                     Price = x.Car.Price.ToString("#.##"),
-                     Expire = (DateTime)x.Car.ExpireDate
+                     Price = x.Car.Price.ToString("#.##")
                  })
                 .ToListAsync();
             return listedCars;

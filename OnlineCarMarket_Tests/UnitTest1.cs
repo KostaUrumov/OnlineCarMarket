@@ -10,15 +10,15 @@ namespace OnlineCarMarket_Tests
         [SetUp]
         public void Setup()
         {
-            
-            
+
+
         }
 
         [Test]
         public void Test_AddCarAsync()
         {
             Mock<ICarService> carServ = new Mock<ICarService>();
-            
+
             RegisterCarViewModel model = new RegisterCarViewModel()
             {
                 ManifacturerId = 1,
@@ -29,7 +29,7 @@ namespace OnlineCarMarket_Tests
                 FirstRegistration = DateTime.Now,
                 NumberOfDoors = 4,
                 Price = 111
-                
+
             };
             Car car = new Car()
             {
@@ -50,9 +50,98 @@ namespace OnlineCarMarket_Tests
                    .Returns(Task.FromResult(car));
 
             var serv = carServ.Object;
-            Car auto = serv.AddCarAsync(model).Result ;
+            Car auto = serv.AddCarAsync(model).Result;
             Assert.That(serv.AddCarAsync(model).Result, Is.EqualTo(auto));
 
         }
+
+        [Test]
+        public void Test_GetTheLastFiveCars()
+        {
+            List<DisplayCarModel> result = new List<DisplayCarModel>();
+
+            
+
+            Mock<ICarService> carServ = new Mock<ICarService>();
+            var serv = carServ.Object;
+            carServ.Setup(c => c.LastFiveAddedCars())
+                .Returns(new List<DisplayCarModel>()
+                {
+                new DisplayCarModel()
+                {
+                EnginePower = 100,
+                Id = 1,
+                Model = "e46",
+                Manifacturer = "BMW",
+                FirstRegistration = "01.01.2001",
+                EngineVolume = 2000,
+                Price = "10000",
+                isObserved = false
+
+                },
+
+             new DisplayCarModel
+            {
+                EnginePower = 100,
+                Id = 1,
+                Model = "e46",
+                Manifacturer = "BMW",
+                FirstRegistration = "01.01.2001",
+                EngineVolume = 2000,
+                Price = "10000",
+                isObserved = false
+
+            },
+
+              new DisplayCarModel
+            {
+                EnginePower = 100,
+                Id = 1,
+                Model = "e46",
+                Manifacturer = "BMW",
+                FirstRegistration = "01.01.2001",
+                EngineVolume = 2000,
+                Price = "10000",
+                isObserved = false
+
+            },
+
+             new DisplayCarModel
+            {
+                EnginePower = 100,
+                Id = 1,
+                Model = "e46",
+                Manifacturer = "BMW",
+                FirstRegistration = "01.01.2001",
+                EngineVolume = 2000,
+                Price = "10000",
+                isObserved = false
+
+            },
+
+             new DisplayCarModel
+            {
+                EnginePower = 100,
+                Id = 1,
+                Model = "e46",
+                Manifacturer = "BMW",
+                FirstRegistration = "01.01.2001",
+                EngineVolume = 2000,
+                Price = "10000",
+                isObserved = false
+
+            },
+
+        });
+                
+                
+
+               
+
+
+
+            
+        }
     }
 }
+
