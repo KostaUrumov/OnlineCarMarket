@@ -139,8 +139,6 @@ namespace OnlineCarMarket_Tests
             var serv = carServ.Object;
             Assert.That(serv.searchByFuel(fuel), Is.EqualTo(display));
 
-
-
         }
 
         
