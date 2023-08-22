@@ -105,10 +105,6 @@ namespace OnlineCarMarket_Core.Services.UserServ
             return true;
 
 
-
-            
-
-
         }
 
         public bool UserExists(string username)
