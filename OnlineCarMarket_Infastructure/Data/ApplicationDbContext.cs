@@ -12,6 +12,8 @@ namespace OnlineCarMarket_Infastructure.Data
         {
         }
 
+        
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Car>()
