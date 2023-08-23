@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Authentication;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineCarMarket_Core.Models.UserModels
 {
@@ -12,5 +13,7 @@ namespace OnlineCarMarket_Core.Models.UserModels
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
+
+        public IList<AuthenticationScheme> ExternalLogins { get; set; }
     }
 }

@@ -11,14 +11,18 @@ using OnlineCarMarket.Areas.Administrator.Interfaces;
 using OnlineCarMarket.Areas.Administrator.Services.ContServ;
 using OnlineCarMarket.Areas.Administrator.Services.EngServBodyServ;
 using OnlineCarMarket.Areas.Administrator.Services.ManServ;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+
 
 builder.Services.AddDefaultIdentity<User>
     (options =>
@@ -34,6 +38,14 @@ builder.Services.AddDefaultIdentity<User>
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddAuthentication()
+    .AddGoogle(googleOptions =>
+    {
+        googleOptions.ClientId = "861217451171-ce74dsav6j3efh4akjlv6nq2bv55q03j.apps.googleusercontent.com";
+        googleOptions.ClientSecret = "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";
+    });
 
 
 builder.Services.AddScoped<IUserServices, UserServices>();
