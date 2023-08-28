@@ -129,7 +129,8 @@ namespace OnlineCarMarket_Core.Services.CarServ
                      EnginePower = x.Car.Engine.HorsePower,
                      EngineVolume = x.Car.Engine.Volume,
                      Price = x.Car.Price.ToString("#.##"),
-                     Expire = (DateTime)x.Car.ExpireDate
+                     Expire = (DateTime)x.Car.ExpireDate,
+                     Picture = x.Car.Picture
                      
                  })
                 .ToListAsync();
