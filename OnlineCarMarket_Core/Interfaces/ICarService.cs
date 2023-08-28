@@ -39,5 +39,7 @@ namespace OnlineCarMarket_Core.Interfaces
         Task <List<DisplayCarModel>> CheckIfExpired (List<DisplayCarModel> list);
         Task RenewCarOffer(int id);
 
+        Task AddPictureToCar(byte[] data, int id);
+
     }
 }

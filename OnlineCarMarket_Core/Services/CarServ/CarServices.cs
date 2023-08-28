@@ -13,6 +13,8 @@ namespace OnlineCarMarket_Core.Services.CarServ
         {
             data = _data;
         }
+
+        
         public async Task<Car> AddCarAsync(RegisterCarViewModel model)
         {
 
@@ -32,6 +34,17 @@ namespace OnlineCarMarket_Core.Services.CarServ
             data.Cars.Add(auto);
             await data.SaveChangesAsync();
             return auto;
+
+        }
+
+        public async Task AddPictureToCar(byte[] pictureData, int id)
+        {
+          
+           Car car = data.Cars.First(x => x.Id == id);
+           car.Picture = pictureData;
+
+            await data.SaveChangesAsync();
+
 
         }
 

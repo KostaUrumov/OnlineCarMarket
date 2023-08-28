@@ -47,5 +47,7 @@ namespace OnlineCarMarket_Infastructure.Entities
 
         public DateTime? ExpireDate { get; set; }
 
+        public byte[]? Picture { get; set; }
+
     }
 }

@@ -12,7 +12,7 @@ namespace OnlineCarMarket.Controllers
     {
         private readonly ApplicationDbContext data;
         private readonly ICarService carServices;
-        
+
 
         public CarController(
             ApplicationDbContext _data,
@@ -26,10 +26,10 @@ namespace OnlineCarMarket.Controllers
         [Authorize]
         public async Task<IActionResult> SelectBrand()
         {
-            
+
             AddCarManufacturerModel model = new AddCarManufacturerModel()
             {
-                Manifacturers =  await carServices.GetManifacturers()
+                Manifacturers = await carServices.GetManifacturers()
             };
 
             return View(model);
@@ -37,7 +37,7 @@ namespace OnlineCarMarket.Controllers
 
         [HttpPost]
         [Authorize]
-        public  IActionResult SelectBrand(AddCarManufacturerModel model)
+        public IActionResult SelectBrand(AddCarManufacturerModel model)
         {
             return RedirectToAction(nameof(AddCar), model);
         }
@@ -53,7 +53,7 @@ namespace OnlineCarMarket.Controllers
                 Engine = await carServices.GetEngines(model.ManifacturerId),
                 FirstRegistration = new DateTime(2010, 1, 1),
                 Manifacturers = await carServices.GetManifacturers(model.ManifacturerId)
-                
+
             };
 
 
@@ -65,7 +65,7 @@ namespace OnlineCarMarket.Controllers
         [Authorize]
         public async Task<IActionResult> AddCar(RegisterCarViewModel model)
         {
-            
+
             if (ModelState.IsValid)
             {
                 var userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
@@ -84,7 +84,7 @@ namespace OnlineCarMarket.Controllers
 
             var userId = User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             List<DisplayCarModel> listedCars = await carServices.GetAllCars(userId);
-            List<DisplayCarModel> returnCars =  await carServices.CheckIfExpired(listedCars);
+            List<DisplayCarModel> returnCars = await carServices.CheckIfExpired(listedCars);
             return View(await carServices.CheckIfCarAreObservedByUser(userId, returnCars));
         }
 
@@ -129,7 +129,7 @@ namespace OnlineCarMarket.Controllers
         {
             var filteredcars = carServices.searchByManifacture(model);
             return View(nameof(Result), filteredcars);
-           
+
         }
 
         [HttpGet]
@@ -207,9 +207,31 @@ namespace OnlineCarMarket.Controllers
             return RedirectToAction(nameof(MyCars));
         }
 
-        public IActionResult UploadPicture()
+        [HttpGet]
+        public IActionResult UploadPicture(int id)
         {
-            return View();   
+            
+            return View(id);
+        }
+
+       
+
+        [HttpPost]
+        public async Task<IActionResult> UploadPicture(IFormFileCollection files, int id)
+        {
+            byte[] data = new byte[files.Count]; 
+            foreach (var file in files)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    await file.CopyToAsync(ms);
+                    data = ms.ToArray();
+                }
+            }
+
+            await carServices.AddPictureToCar(data, id);
+
+            return RedirectToAction(nameof(MyCars));
         }
 
     }

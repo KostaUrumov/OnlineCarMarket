@@ -37,6 +37,8 @@ namespace OnlineCarMarket_Core.Models.Car
         [Range(DataConstraints.Car.MinPrice, DataConstraints.Car.MaxPrice)]
         public decimal Price { get; set; }
 
+        public byte[]? Picture { get; set; }
+
 
     }
 }
