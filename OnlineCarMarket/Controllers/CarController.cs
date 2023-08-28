@@ -207,5 +207,10 @@ namespace OnlineCarMarket.Controllers
             return RedirectToAction(nameof(MyCars));
         }
 
+        public IActionResult UploadPicture()
+        {
+            return View();   
+        }
+
     }
 }
