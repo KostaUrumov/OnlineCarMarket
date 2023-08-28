@@ -14,6 +14,6 @@ namespace OnlineCarMarket_Core.Models.UserModels
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
 
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        public IList<AuthenticationScheme>? ExternalLogins { get; set; }
     }
 }
